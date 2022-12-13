@@ -1,0 +1,41 @@
+<ion-header>
+
+  <app-logout-user></app-logout-user>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-content>
+
+
+
+    <ion-list id="inbox-list">
+      <ion-list-header>
+        <ion-label text-center> Benvenuto in Genial lotto, scegli l'algoritmo <ion-icon name="arrow-down"
+            style="zoom:4.0" color="danger"></ion-icon>
+        </ion-label>
+      </ion-list-header>
+
+
+      <ion-item class="menuItem" routerDirection="root" lines="none" detail="false" routerLinkActive="selected"
+        (click)="p.onClick()" *ngFor="let p of appPages; let i = index">
+        <ion-icon color="danger" slot="start" name="arrow-forward"></ion-icon>
+        <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'" *ngIf="!p.src"></ion-icon>
+        <ion-img slot="start" src={{p.src}} *ngIf="p.src" style="height:40px"></ion-img>
+        <ion-icon src=""></ion-icon>
+        <ion-label style=" background-color:black; color: white;">{{ p.title }}</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-footer style="font-size:small">Disclaimer:I risultati che otterrai grazie a Genial lotto saranno frutto del tuo
+      impegno profuso nel tempo!nessuno garantisce la Tua vincita
+      là dove non seguirai i video presenti nella piattaforma e non ti focalizzerai nel modo giusto! questo è un sistema
+      vincentelà dove tu seguirai e saprai
+      studiare, concentrato come Giusy consiglia. Non calcolare per giocare, ma calcola per capire, la vincita è una
+      conseguenza dell'aver capito,
+      ma se farai di testa Tua giocando a caso senza uno studio mirato e focalizzato, noi di Vinciamo insieme al lotto
+      decliniamo qualsiasi responsabilità sulle tue future perdite.
+      Grazie e Buone Vincite </ion-footer>
+  </ion-content>
+
+</ion-content>

@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator, Validators } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -27,7 +27,7 @@ export class PasswordFieldComponent implements OnInit, ControlValueAccessor, Val
   @Input() retypePassword: boolean
   disabled: boolean;
   password = '';
-  passwordForm: FormGroup
+  passwordForm: UntypedFormGroup
   touched = false;
   subscription: Subscription
   _id: string
@@ -58,7 +58,7 @@ export class PasswordFieldComponent implements OnInit, ControlValueAccessor, Val
     return this.match || !this.touched || (this.touched && ! !!this.retypePassword && !this.match)
   }
 
-  constructor(public formBuilder: FormBuilder) {
+  constructor(public formBuilder: UntypedFormBuilder) {
 
 
 
@@ -105,10 +105,10 @@ export class PasswordFieldComponent implements OnInit, ControlValueAccessor, Val
 
   ngOnInit() {
     this.passwordForm = this.retypePassword ? this.formBuilder.group({
-      password: new FormControl(this.password, Validators.required),
-      retype: new FormControl(this.retype)
+      password: new UntypedFormControl(this.password, Validators.required),
+      retype: new UntypedFormControl(this.retype)
     }) : this.formBuilder.group({
-      password: new FormControl(this.password, Validators.required)
+      password: new UntypedFormControl(this.password, Validators.required)
     })
 
     this.subscription = this.passwordForm.valueChanges.subscribe(d => {

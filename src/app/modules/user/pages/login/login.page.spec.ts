@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LoginPage } from './login.page';
@@ -16,7 +16,7 @@ describe('LoginPage', () => {
       declarations: [LoginPage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [IonicModule.forRoot(), ReactiveFormsModule, RouterModule, RouterTestingModule],
-      providers: [LoadingController, AlertController,AuthService,FormBuilder]
+      providers: [LoadingController, AlertController,AuthService,UntypedFormBuilder]
     })
       .compileComponents();
   }));

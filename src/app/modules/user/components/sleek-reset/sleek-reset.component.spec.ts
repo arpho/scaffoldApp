@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { IonicModule } from '@ionic/angular';
 
@@ -13,7 +13,7 @@ describe('SleekResetComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ SleekResetComponent ],
       imports: [IonicModule.forRoot(),RouterTestingModule],
-      providers:[FormBuilder]
+      providers:[UntypedFormBuilder]
     }).compileComponents();
 
     fixture = TestBed.createComponent(SleekResetComponent);

@@ -24,34 +24,31 @@ import { MenuPage } from './pages/menu/menu.page';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SelectorItemsPage,
-    EditUserPage,
-    ProfilePage,
-    NewCustomerPage,
-    UpdateCustomerPage,
-    ScatterComponent,
-    BarComponent,
-    FilterPopupPage,
-    CookiesLawComponent,
-    MenuPage,
-   ],
-  entryComponents: [],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(),
-    AppRoutingModule,
-    DynamicFormModule,
-    ItemModule,
-    HelpersModule,
-    UserModule,
-    
+    declarations: [
+        AppComponent,
+        SelectorItemsPage,
+        EditUserPage,
+        ProfilePage,
+        NewCustomerPage,
+        UpdateCustomerPage,
+        ScatterComponent,
+        BarComponent,
+        FilterPopupPage,
+        CookiesLawComponent,
+        MenuPage,
     ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent],
-  exports:[
-  ],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        DynamicFormModule,
+        ItemModule,
+        HelpersModule,
+        UserModule,
+    ],
+    providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+    bootstrap: [AppComponent],
+    exports: [],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

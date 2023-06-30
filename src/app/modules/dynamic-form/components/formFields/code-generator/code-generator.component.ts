@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -24,7 +24,7 @@ export class CodeGeneratorComponent implements OnInit,ControlValueAccessor,OnDes
   disabled: boolean;
   subscription:Subscription=Subscription.EMPTY
   touched = false;
-  enablingCodeForm:FormGroup;
+  enablingCodeForm:UntypedFormGroup;
   private onChange: Function = (password: string) => { };
   // tslint:disable-next-line: ban-types
   private onTouch: Function = () => { };
@@ -55,7 +55,7 @@ export class CodeGeneratorComponent implements OnInit,ControlValueAccessor,OnDes
   }
 
   constructor(
-    public formBuilder: FormBuilder
+    public formBuilder: UntypedFormBuilder
   ) { }
   validate(control: AbstractControl): ValidationErrors {
     return  this.validator(control)
@@ -85,7 +85,7 @@ export class CodeGeneratorComponent implements OnInit,ControlValueAccessor,OnDes
 
   ngOnInit() {
     console.log("genera code")
-    this.enablingCodeForm= this.formBuilder.group({code:new FormControl(this.code)})
+    this.enablingCodeForm= this.formBuilder.group({code:new UntypedFormControl(this.code)})
    this.subscription= this.enablingCodeForm.valueChanges.subscribe(d=>{
       this.markAsTouched()
       this.onChange(d.code)

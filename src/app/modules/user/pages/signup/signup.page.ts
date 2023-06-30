@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { LoadingController, AlertController, ModalController } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscriber, Subscription } from 'rxjs';
 import { QuestionBase } from 'src/app/modules/dynamic-form/models/question-base';
@@ -20,7 +20,7 @@ import { configs } from 'src/app/configs/configs';
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit, OnDestroy {
-  public signupForm: FormGroup;
+  public signupForm: UntypedFormGroup;
   public usersFields: any
   public modal: any;
   subscription: Subscription
@@ -30,7 +30,7 @@ export class SignupPage implements OnInit, OnDestroy {
     private authService: AuthService,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router,
     public service:UsersService
   ) {
@@ -107,7 +107,7 @@ validator:Validators.requiredTrue
 
   }
 
-  async signupUser(signupForm: FormGroup, user: UserModel): Promise<void> {
+  async signupUser(signupForm: UntypedFormGroup, user: UserModel): Promise<void> {
   
       const email: string = signupForm.value.email.email;
       const password: string = signupForm.value.password;

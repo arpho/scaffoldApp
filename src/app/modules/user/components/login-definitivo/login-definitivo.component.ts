@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { getAuth, setPersistence, browserLocalPersistence } from 'firebase/auth';
@@ -13,7 +13,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginDefinitivoComponent implements OnInit {
 
-  public loginForm: FormGroup;
+  public loginForm: UntypedFormGroup;
   public loading: HTMLIonLoadingElement;
   buttonText = ""
   ngOnInit() {
@@ -32,7 +32,7 @@ export class LoginDefinitivoComponent implements OnInit {
     public alertCtrl: AlertController,
     private authService: AuthService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) {
     this.loginForm = this.formBuilder.group({
       email: ["", Validators.compose([Validators.required, Validators.email])],
@@ -52,7 +52,7 @@ export class LoginDefinitivoComponent implements OnInit {
       this.router.navigateByUrl("users/complete-registration")
     }
   }
-  async loginUser(loginForm: FormGroup): Promise<void> {
+  async loginUser(loginForm: UntypedFormGroup): Promise<void> {
 
     if (!loginForm.valid) {
       console.log("Form is not valid yet, current value:", loginForm.value);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { getAuth, setPersistence, browserLocalPersistence, sendPasswordResetEmail } from 'firebase/auth';
@@ -15,7 +15,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class SleekResetComponent implements OnInit {
 
-  public resetForm: FormGroup;
+  public resetForm: UntypedFormGroup;
   public loading: HTMLIonLoadingElement;
   buttonText = ""
   ngOnInit() {
@@ -35,7 +35,7 @@ export class SleekResetComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private toaster:MyToastService,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) {
     this.resetForm = this.formBuilder.group({
       email: ["", Validators.compose([Validators.required, Validators.email])],
@@ -47,7 +47,7 @@ export class SleekResetComponent implements OnInit {
    }
 
  
-  async resetPassword(resetForm:FormGroup){
+  async resetPassword(resetForm:UntypedFormGroup){
     console.log((resetForm.value))
     const auth = getAuth()
     sendPasswordResetEmail(auth,resetForm.value.email).then((()=>{
@@ -58,7 +58,7 @@ export class SleekResetComponent implements OnInit {
       this.toaster.presentToast(`la mail inserita:${resetForm.value.email} non è registrata`)
     })
   }
-  async loginUser(loginForm: FormGroup): Promise<void> {
+  async loginUser(loginForm: UntypedFormGroup): Promise<void> {
 
     if (!loginForm.valid) {
       console.log("Form is not valid yet, current value:", loginForm.value);

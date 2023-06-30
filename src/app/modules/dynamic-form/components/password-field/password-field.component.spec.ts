@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { PasswordFieldComponent } from './password-field.component';
@@ -12,7 +12,7 @@ describe('PasswordFieldComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ PasswordFieldComponent ],
       providers:[
-        FormBuilder
+        UntypedFormBuilder
       ],
       imports: [IonicModule.forRoot(),ReactiveFormsModule]
     }).compileComponents();

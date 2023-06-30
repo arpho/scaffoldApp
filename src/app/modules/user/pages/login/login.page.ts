@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, Validators, FormBuilder } from "@angular/forms";
+import { UntypedFormGroup, Validators, UntypedFormBuilder } from "@angular/forms";
 import { LoadingController, AlertController } from "@ionic/angular";
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
@@ -13,7 +13,7 @@ import { configs, registrationStrategy } from "src/app/configs/configs";
   styleUrls: ["./login.page.scss"]
 })
 export class LoginPage implements OnInit {
-  public loginForm: FormGroup;
+  public loginForm: UntypedFormGroup;
   public loading: HTMLIonLoadingElement;
   buttonText = ""
   ngOnInit() {
@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
     public alertCtrl: AlertController,
     private authService: AuthService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) {
     this.loginForm = this.formBuilder.group({
       email: ["", Validators.compose([Validators.required, Validators.email])],
@@ -52,7 +52,7 @@ export class LoginPage implements OnInit {
       this.router.navigateByUrl("users/complete-registration")
     }
   }
-  async loginUser(loginForm: FormGroup): Promise<void> {
+  async loginUser(loginForm: UntypedFormGroup): Promise<void> {
 
     if (!loginForm.valid) {
       console.log("Form is not valid yet, current value:", loginForm.value);

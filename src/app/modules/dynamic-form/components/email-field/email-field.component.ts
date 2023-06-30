@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, FormBuilder, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator, Validators } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, UntypedFormBuilder, UntypedFormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -59,7 +59,7 @@ export class EmailFieldComponent implements OnInit, ControlValueAccessor, Valida
 
 
 
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(public formBuilder: UntypedFormBuilder) { }
   validate(control: AbstractControl): ValidationErrors {
     if (!this.isValid()) {
       return { notValidEmail: this.email }
@@ -78,7 +78,7 @@ export class EmailFieldComponent implements OnInit, ControlValueAccessor, Valida
 
 
   ngOnInit() {
-    this.emailForm = this.formBuilder.group({ email: new FormControl(this.email, Validators.email) })
+    this.emailForm = this.formBuilder.group({ email: new UntypedFormControl(this.email, Validators.email) })
     this.subscription = this.emailForm.valueChanges.subscribe(d => {
       this.markAsTouched()
       this.onChange( d.email )

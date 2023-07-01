@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { credentials } from 'src/app/configs/credentials';
 @Injectable({
   providedIn: 'root'
 })
-export class ExpirationTimeGuard implements CanActivate {
+export class ExpirationTimeGuard  {
 
   constructor(private router:Router) { }
   isCurrent(expirationTime:string,locked?:boolean){

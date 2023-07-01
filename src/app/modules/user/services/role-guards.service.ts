@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Router, CanActivate, ActivatedRouteSnapshot } from "@angular/router";
+import { Router, ActivatedRouteSnapshot } from "@angular/router";
 // import { decode } from "jwt-decode";
 import firebase from 'firebase/compat/app';
 import "firebase/auth";
@@ -13,7 +13,7 @@ import { configs } from "src/app/configs/configs";
 @Injectable({
   providedIn: "root"
 })
-export class RoleGuardService implements CanActivate {
+export class RoleGuardService  {
   public loggedUser: UserModel;
   constructor(public router: Router, public Users: UsersService) {}
 

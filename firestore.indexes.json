@@ -1,19 +1,4 @@
 {
-  "indexes": [
-    {
-      "collectionGroup": "extractions",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "weel",
-          "arrayConfig": "CONTAINS"
-        },
-        {
-          "fieldPath": "date",
-          "order": "ASCENDING"
-        }
-      ]
-    }
-  ],
+  "indexes": [],
   "fieldOverrides": []
 }

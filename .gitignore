@@ -24,3 +24,5 @@ scraper
 .angular/cache/13.3.9/babel-webpack/4e22b5d6f217d810d3d1d6e18ef32de0.json
 .angular/cache/13.3.9/babel-webpack/4ed9a868ba0f05d4cec19d8e5e881917.json
 .angular
+
+src/app/configs/credentials.ts

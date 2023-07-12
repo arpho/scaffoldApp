@@ -11,7 +11,7 @@ import { configs } from "src/app/configs/configs";
 import "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { credentials } from "src/app/configs/credentials";
-import { addDoc, collection, doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, setDoc } from "firebase/firestore";
 import { Firestore } from "@google-cloud/firestore";
 
 @Injectable({
@@ -46,8 +46,8 @@ usersRef
   populateItems = (UsersListSnapshot) => {
     this.items_list = [];
     UsersListSnapshot.forEach(snap => {
-      const user = new UserModel(undefined, snap.key).load(snap.val())
-      user.key = snap.key // alcuni item non hanno il campo key
+      const user = new UserModel(undefined, snap.key).load(snap.data())
+      user.key = snap.key 
       this.items_list.push(user);
       if (user.key === '') {
       }
@@ -59,13 +59,10 @@ usersRef
 
   loadDataAndPublish() {
     const auth = getAuth();
-    onAuthStateChanged(auth,(user) => {
-      if (user) {
-        this.itemsListReference = ref(this.db,this.reference);
-        onValue(this.itemsListReference,(users)=>{
-          this.populateItems(users)
-        })
-      }
+    onAuthStateChanged(auth,async (user) => {
+      const q = query(collection(this.db,"users"))
+      const querySnapshot = await getDocs(q)
+      this.populateItems(querySnapshot)
     });
   }
 

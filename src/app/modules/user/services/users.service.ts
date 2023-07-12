@@ -11,7 +11,7 @@ import { configs } from "src/app/configs/configs";
 import "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { credentials } from "src/app/configs/credentials";
-import { collection, getDoc, getFirestore } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import { Firestore } from "@google-cloud/firestore";
 
 @Injectable({
@@ -114,10 +114,10 @@ console.error(error);
     return new UserModel();
   }
 
-  createItem(item: ItemModelInterface) {
+ async  createItem(item: ItemModelInterface) {
+  //it would better using addDoc, but we want to use the key generated for the new account from firebase
 
-    const itemRef = ref(this.db,this.reference)
-    return push(itemRef,item.serialize());
+    return  setDoc(doc(this.db,"users",item.key),item.serialize())
   }
 
   getEntitiesList(): DatabaseReference{

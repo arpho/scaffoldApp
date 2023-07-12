@@ -8,6 +8,11 @@ import { ItemModelInterface } from "../../item/models/itemModelInterface";
 import { BehaviorSubject, Observable } from 'rxjs';
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { configs } from "src/app/configs/configs";
+import "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { credentials } from "src/app/configs/credentials";
+import { collection, getDoc, getFirestore } from "firebase/firestore";
+import { Firestore } from "@google-cloud/firestore";
 
 @Injectable({
   providedIn: "root"
@@ -22,11 +27,15 @@ export class UsersService implements ItemServiceInterface, OnInit {
 
   readonly items: Observable<Array<UserModel>> = this._items.asObservable()
 static loggedUser:UserModel
-db
+db: any
+usersRef
   constructor() {
-    this.db = getDatabase()
-    this.itemsListReference = ref(this.db)//,"/userProfile");
+  //                                                        this.itemsListReference = ref(this.db)//,"/userProfile");
     this.loadDataAndPublish()
+    const app = initializeApp(credentials.firebase)
+    this.db = getFirestore(app)
+    this.usersRef = collection(this.db,'users')
+
 
   }
   categoriesService?: ItemServiceInterface;
@@ -60,12 +69,9 @@ db
     });
   }
 
-  getItem(key: string,next) {
-    if (this.itemsListReference) {
-      const itemRef = ref(this.db,this.reference+key)
-      onValue(itemRef,(snap)=>{next(snap)})
-
-    }
+  async getItem(key: string,next) {
+    const docSnap = await getDoc(this.usersRef)
+     return new UserModel(docSnap.data())
   }
 
   FetchRole(level:number){

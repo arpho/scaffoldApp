@@ -124,9 +124,7 @@ console.error(error);
     return this.itemsListReference;
   }
 
-  updateItem(item: ItemModelInterface) {
-
-    const itemRef = ref(this.db,this.reference+item.key)
-    return update(itemRef,item.serialize());
+ async  updateItem(item: ItemModelInterface) {
+    return setDoc(doc(this.db,"users",item.key),item.serialize())
   }
 }

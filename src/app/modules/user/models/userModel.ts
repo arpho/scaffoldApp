@@ -28,7 +28,13 @@ export class UserModel implements ItemModelInterface {
   enabled: boolean;
   role: RoleModel;
   service: ItemServiceInterface;
-
+  set fullName (name:string){
+    this.firstName= name.split(' ')[0]
+    this.lastName= name.split(' ')[1]
+  }
+get fullName(){
+  return `${this.firstName} ${this.lastName}`
+}
   set expirationDate (date:string){
     this._expirationDate = new DateModel(new Date(date))
     this._expirationTime = this._expirationDate.getTime()

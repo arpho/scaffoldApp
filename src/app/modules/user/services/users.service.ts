@@ -11,8 +11,7 @@ import { configs } from "src/app/configs/configs";
 import "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { credentials } from "src/app/configs/credentials";
-import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, setDoc } from "firebase/firestore";
-import { Firestore } from "@google-cloud/firestore";
+import {  collection, doc, getDoc, getDocs, getFirestore, query, setDoc } from "firebase/firestore";
 
 @Injectable({
   providedIn: "root"
@@ -23,8 +22,6 @@ export class UsersService implements ItemServiceInterface, OnInit {
   _items: BehaviorSubject<Array<UserModel>> = new BehaviorSubject([])
   _loggedUser: BehaviorSubject<UserModel> = new BehaviorSubject(new UserModel)
   loggedUser: Observable<UserModel> = this._loggedUser.asObservable()
-
-
   readonly items: Observable<Array<UserModel>> = this._items.asObservable()
 static loggedUser:UserModel
 db: any
@@ -35,6 +32,9 @@ usersRef
     const app = initializeApp(credentials.firebase)
     this.db = getFirestore(app)
     this.usersRef = collection(this.db,'users')
+    this.items.subscribe(items=>{
+      
+    })
 
 
   }
@@ -43,30 +43,32 @@ usersRef
   paymentsService?: ItemServiceInterface;
   itemsListRef: DatabaseReference;
   reference='userProfile'
-  populateItems = (UsersListSnapshot) => {
+  populateItems = async (UsersListSnapshot) => {
     this.items_list = [];
     UsersListSnapshot.forEach(snap => {
-      const user = new UserModel(undefined, snap.key).load(snap.data())
-      user.key = snap.key 
+      const user = new UserModel(undefined, snap.key).load(snap.data()).setKey(snap.id)
       this.items_list.push(user);
-      if (user.key === '') {
-      }
+
     });
-    this._items.next(this.items_list)
+    return this.items_list
   }
   ngOnInit(): void {
+    console.log("init")
   }
 
   loadDataAndPublish() {
     const auth = getAuth();
-    onAuthStateChanged(auth,async (user) => {
-      const q = query(collection(this.db,"users"))
-      const querySnapshot = await getDocs(q)
-      this.populateItems(querySnapshot)
-    });
+    onAuthStateChanged(auth,this.authStateChangeHandler);
   }
 
-  async getItem(key: string,next) {
+  authStateChangeHandler = async () => {
+    const q = query(collection(this.db, "users"));
+    const querySnapshot = await getDocs(q);
+    const users = await this.populateItems(querySnapshot);
+    this._items.next(users);
+  }
+
+  async getItem(key: string) {
     const docSnap = await getDoc(this.usersRef)
      return new UserModel(docSnap.data())
   }

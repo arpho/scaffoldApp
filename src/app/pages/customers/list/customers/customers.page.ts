@@ -41,10 +41,19 @@ export class CustomersPage implements OnInit {
     })
   ]
 
-  constructor(public service:CustomersService) { }
+  constructor(public service:UsersService) { 
+  }
+  ngAfterViewInit(): void {
+    this.service.items.subscribe(items=> {
+    })
+  }
 
   ngOnInit() {
+    const callback= function(data){
+    }
+    this.service.items.subscribe(callback)
   }
+  
   expiringCustomers(){
     const today= new Date()
     const expirationDate = Utilities4Date.addDays2Date(today,31)

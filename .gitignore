@@ -26,3 +26,7 @@ scraper
 .angular
 
 src/app/configs/credentials.ts
+
+.idea/
+
+src/app/configs/genial-lotto-48e17ef391f6.json

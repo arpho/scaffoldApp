@@ -42,9 +42,9 @@ export class MenuPage implements OnInit {
         onClick: this.onOwnClick(-1, "/customers")
       },
       canAdd: [
-/*         new CheckEnabled(),
+        new CheckEnabled(),
         new CheckExpiration(),
-        new CheckRole(2) */
+        new CheckRole(2) 
       ],
       orLogic: false
     },

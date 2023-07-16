@@ -88,9 +88,9 @@ usersRef
 
   const insertUser = httpsCallable(functions,'adminAddUserProfile')
   return insertUser(user).then((msg)=>{
-	  console.log('insert use',msg)
+	  console.log('inserted use',msg)
   }).catch((error)=>{
-console.error(error);
+console.log(" errore", error);
   });
 
   }

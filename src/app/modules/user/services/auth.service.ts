@@ -7,6 +7,8 @@ import { DatabaseReference, getDatabase, ref, push } from "firebase/database";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, Auth, UserCredential, sendPasswordResetEmail, onAuthStateChanged } from 'firebase/auth'
 import { UserModel } from '../models/userModel'
 import {credentials } from "../../../configs/credentials"
+import { initializeApp } from 'firebase/app';
+import { doc, getFirestore, setDoc } from 'firebase/firestore';
 firebase.initializeApp(credentials.firebase);
 @Injectable({
   providedIn: 'root'
@@ -30,12 +32,15 @@ export class AuthService {
   signupUser(user:UserModel,  next?, error?, complete?): Subscription {
     return this.createUserObserver(user.email, user.password).subscribe({
       next: v => {
+        console.log("sending verification email",v)
+        const userId = v['user'].uid;
         sendEmailVerification(v['user'])
-        const db = getDatabase()
-        const newUser = new UserModel(user).load(user)
-        const usersRef = ref(db, '/userProfile')
+        const app = initializeApp(credentials.firebase)
+        const db = getFirestore(app)
+        const newUser = new UserModel(user).load(user).setKey(userId)
+
         console.log('new user',newUser.serialize())
-        push(usersRef, newUser.serialize())
+        setDoc(doc(db,"users",userId),newUser.serialize())
         if (next) {
           next(v['user'])
         }

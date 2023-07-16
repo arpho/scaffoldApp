@@ -111,7 +111,8 @@ validator:Validators.requiredTrue
   
       const email: string = signupForm.value.email.email;
       const password: string = signupForm.value.password;
-      const successHandler = async () => {
+      const successHandler = async (val) => {
+        console.log("success handler got ",val)
         await this.service.callCloudPushUser(user.serialize())
         console.log('loading', this.modal)
         this.modal.dismiss().then(() => {

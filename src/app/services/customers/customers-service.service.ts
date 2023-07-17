@@ -48,7 +48,7 @@ export class CustomersService implements ItemServiceInterface {
   }
 
   reference: string = "userProfile"
-  _items: BehaviorSubject<ItemModelInterface[]> = new BehaviorSubject([])
+   _items: BehaviorSubject<ItemModelInterface[]> = new BehaviorSubject([])
   items_list: Customer[];
   db: Database;
   itemsListRef: DatabaseReference;
@@ -76,7 +76,7 @@ export class CustomersService implements ItemServiceInterface {
   getEmptyItem(): ItemModelInterface {
     return new Customer()
   }
-  createItem(item: ItemModelInterface) {
+  setItem(item: ItemModelInterface) {
     return push(this.itemsListRef, item.serialize())
   }
   loadDataAndPublish(next?): void {

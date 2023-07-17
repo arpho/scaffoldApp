@@ -26,7 +26,7 @@ export class  serviceMocker implements ItemServiceInterface{
   getEmptyItem(): ItemModelInterface {
     return new ItemMocker()
   }
-  createItem(item: ItemModelInterface) {
+  setItem(item: ItemModelInterface) {
     throw new Error("Method not implemented.");
   }
   loadDataAndPublish(): void {

@@ -27,34 +27,22 @@ export class AuthService {
     return sendPasswordResetEmail(user,email);
   }
 
-  signupUser(user:UserModel,  next?, error?, complete?): Subscription {
-    return this.createUserObserver(user.email, user.password).subscribe({
-      next: v => {
-        sendEmailVerification(v['user'])
-        const db = getDatabase()
-        const newUser = new UserModel(user).load(user)
-        const usersRef = ref(db, '/userProfile')
-        console.log('new user',newUser.serialize())
-        push(usersRef, newUser.serialize())
-        if (next) {
-          next(v['user'])
-        }
-      },
-      error: e => {
-        console.error('errore', e)
-
-        if (error) {
-          error(e)
-        }
-      },
-      complete: () => {
-        console.log('ok')
-        if (complete) {
-          console.log("completing")
-          complete()
-        }
+  async signupUser(user:UserModel,  next?, error?, complete?) {
+    try{
+      const auth = getAuth()
+      const userCredential= await createUserWithEmailAndPassword(auth,user.email,user.password)
+      console.log("created user",userCredential)
+      if(next){
+        next(userCredential)
       }
-    })
+    }
+    catch(errorTrown){
+      console.log("errore",errorTrown)
+      if(error){
+        error(error)
+      }
+
+    }
 
   }
   getCustomclaims(next:(claims)=>void){

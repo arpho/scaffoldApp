@@ -27,7 +27,6 @@ static loggedUser:UserModel
 db: any
 usersRef
   constructor() {
-  //                                                        this.itemsListReference = ref(this.db)//,"/userProfile");
     this.loadDataAndPublish()
     const app = initializeApp(credentials.firebase)
     this.db = getFirestore(app)
@@ -113,12 +112,18 @@ console.error(error);
     return new UserModel();
   }
 
- async  createItem(item: ItemModelInterface) {
-  //it would better using addDoc, but we want to use the key generated for the new account from firebase
+  async  setItem(item: ItemModelInterface) {
+ 
+     return  setDoc(doc(this.db,"users",item.key),item.serialize())
+   }
 
-    return  setDoc(doc(this.db,"users",item.key),item.serialize())
-  }
 
+   async  createItem(item: ItemModelInterface) {
+    console.log("creating document",item)
+  
+      return  setDoc(doc(this.db,"users",item.key),item.serialize())
+    }
+   
   getEntitiesList(): DatabaseReference{
     return this.itemsListReference;
   }

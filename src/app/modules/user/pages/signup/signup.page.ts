@@ -111,9 +111,12 @@ validator:Validators.requiredTrue
   
       const email: string = signupForm.value.email.email;
       const password: string = signupForm.value.password;
-      const successHandler = async () => {
-        await this.service.callCloudPushUser(user.serialize())
-        console.log('loading', this.modal)
+      const successHandler = async (userCredentials) => {
+        console.log("got credentials",userCredentials)
+        //creating user's profile
+        const user = new UserModel().load(userCredentials.user)
+        console.log("creating",user)
+        this.service.createItem(user)
         this.modal.dismiss().then(() => {
        
 

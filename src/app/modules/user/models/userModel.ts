@@ -27,6 +27,8 @@ export class UserModel implements ItemModelInterface {
   quickActions: Array<QuickAction>;
   enabled: boolean;
   role: RoleModel;
+  dor = new DateModel(new Date())
+  displayName:string
   service: ItemServiceInterface;
   set fullName (name:string){
     this.firstName= name.split(' ')[0]
@@ -91,7 +93,8 @@ get fullName(){
   }
 
   getTitle() {
-    return new Value({ value: this.email, label: 'user mail' });
+    const defineText = (v:string)=>v?v:''
+    return new Value({ value: `${defineText( this.displayName)}: ${this.email}`, label: 'user mail' });
   }
 
   build(item: {}) {
@@ -103,6 +106,8 @@ get fullName(){
     }
     Object.entries(item).forEach(loader);
     // tslint:disable-next-line: no-string-literal
+
+    
     if (item['birthDate']) {
       // tslint:disable-next-line: no-strin
       this.birthDate = new DateModel(item['birthDate']);
@@ -128,10 +133,12 @@ get fullName(){
     const out = {
       uid: this.uid || this.key,
       birthDate: this.birthDate ? this.birthDate.serialize() : '',
+      dor: new DateModel(this.dor).formatDate(),
       email: this.email ?? '',
       firstName: this.firstName ?? '',
       lastName: this.lastName ?? '',
       enabled: !!this.enabled,
+      displayName:serializer.serialize2String(this.displayName),
       expirationDate:serializer.serialize2String(this.expirationDate),
       level: this.role && this.role.value ? this.role.value : 3,
       archived: !!this.archived
@@ -157,6 +164,8 @@ get fullName(){
   load(args) {
     Object.assign(this, args)
     this.role = this.roleFactory(this.level)
+    if(args&&args['dor']){
+      this.dor = new DateModel(new Date(this.dor))}
     this.key = this.key ?? this.uid
     this.enabled = Boolean(this.enabled)
     this.expirationDate= this.expirationDate||new DateModel(new Date()).formatDate()
@@ -171,7 +180,7 @@ get fullName(){
 
   getValue2() {
     const value = new Value({
-      value: this.enabled ? '' : ' non abilitato',
+      value: this.enabled ? '     abilitato' : ' non abilitato',
       label: ' abilitato'
     });
     return value;
@@ -179,8 +188,8 @@ get fullName(){
 
   getValue4() {
     const value = new Value({
-      value: this.enabled ? 'si' : 'no',
-      label: ' abilitato '
+      value: this.fullName,
+      label: ' nome intero '
     });
     return value;
   }

@@ -15,6 +15,7 @@ export class Customer extends UserModel {
     telephones: Array<Telephone> = []
     dor = new DateModel(new Date()) // date of registration
     role = new RoleModel({ key: "Utente standard", value: 3 })
+  displayName: string
     get enablingCode(){
         return this._enablingCode
     }
@@ -71,6 +72,7 @@ export class Customer extends UserModel {
 				level:serializers.serialize2PositiveNumber( this.level,3),
                 telephones: telephones,
                 archived: !!this.archived,
+                displayName:serializers.serialize2String(this.displayName),
                 dor: new DateModel(this.dor).formatDate(),
                 userType: this.userType,
                 enablingCode:serializers.serialize2String(this.enablingCode),

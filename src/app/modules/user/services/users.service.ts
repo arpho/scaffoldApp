@@ -11,7 +11,7 @@ import { configs } from "src/app/configs/configs";
 import "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { credentials } from "src/app/configs/credentials";
-import {  collection, doc, getDoc, getDocs, getFirestore, query, setDoc } from "firebase/firestore";
+import {  collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, setDoc } from "firebase/firestore";
 
 @Injectable({
   providedIn: "root"
@@ -37,6 +37,7 @@ usersRef
 
 
   }
+  
   categoriesService?: ItemServiceInterface;
   suppliersService?: ItemServiceInterface;
   paymentsService?: ItemServiceInterface;
@@ -95,16 +96,14 @@ console.error(error);
   }
 
   setLoggedUser(user: ItemModelInterface) {
-    console.log('setting user', user)
     this._loggedUser.next(new UserModel(user, user['uid']));
     UsersService.loggedUser= new UserModel(user, user['uid'])
     return this.loggedUser;
   }
 
   deleteItem(key: string) {
-
-    const itemRef = ref(this.db,this.reference+key)
-    return remove(itemRef)
+    console.log("deleting",key)
+    return deleteDoc(doc(this.db,"users",key))
     
   }
 

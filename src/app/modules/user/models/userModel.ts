@@ -137,6 +137,7 @@ get fullName(){
       email: this.email ?? '',
       firstName: this.firstName ?? '',
       lastName: this.lastName ?? '',
+      fullName:this.fullName ?? '',
       enabled: !!this.enabled,
       displayName:serializer.serialize2String(this.displayName),
       expirationDate:serializer.serialize2String(this.expirationDate),

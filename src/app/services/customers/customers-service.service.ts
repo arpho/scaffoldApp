@@ -20,6 +20,12 @@ export class CustomersService implements ItemServiceInterface {
     this.itemsListRef = ref(this.db, this.reference)
     this.loadDataAndPublish(this.publishItems)
   }
+  categoriesService?: ItemServiceInterface;
+  suppliersService?: ItemServiceInterface;
+  paymentsService?: ItemServiceInterface;
+  createItem(item: ItemModelInterface) {
+    throw new Error('Method not implemented.');
+  }
 
   publishItems(lista: Customer[]) {// must stay inside onValue to update data evry time there is an update
 

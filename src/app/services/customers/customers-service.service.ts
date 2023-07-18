@@ -29,7 +29,7 @@ export class CustomersService implements ItemServiceInterface {
 
   publishItems(lista: Customer[]) {// must stay inside onValue to update data evry time there is an update
 
-    this._items.next(lista)
+    this.$items.next(lista)
 
   }
 
@@ -54,11 +54,11 @@ export class CustomersService implements ItemServiceInterface {
   }
 
   reference: string = "userProfile"
-   _items: BehaviorSubject<ItemModelInterface[]> = new BehaviorSubject([])
+   $items: BehaviorSubject<ItemModelInterface[]> = new BehaviorSubject([])
   items_list: Customer[];
   db: Database;
   itemsListRef: DatabaseReference;
-  readonly items: Observable<ItemModelInterface[]> = this._items.asObservable()
+  readonly items: Observable<ItemModelInterface[]> = this.$items.asObservable()
   getItem(key: string, next: (item?: any) => void): void {
     const reference = ref(this.db, `${this.reference}/${key}`)
     onValue(reference, user => { next(user) })

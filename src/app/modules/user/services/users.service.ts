@@ -19,10 +19,10 @@ import {  collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, setD
 export class UsersService implements ItemServiceInterface, OnInit {
   public itemsListReference: DatabaseReference;
   items_list: Array<UserModel> = []
-  _items: BehaviorSubject<Array<UserModel>> = new BehaviorSubject([])
+  $items: BehaviorSubject<Array<UserModel>> = new BehaviorSubject([])
   _loggedUser: BehaviorSubject<UserModel> = new BehaviorSubject(new UserModel)
   loggedUser: Observable<UserModel> = this._loggedUser.asObservable()
-  readonly items: Observable<Array<UserModel>> = this._items.asObservable()
+  readonly items: Observable<Array<UserModel>> = this.$items.asObservable()
 static loggedUser:UserModel
 db: any
 usersRef
@@ -56,7 +56,7 @@ usersRef
   authStateChangeHandler = async () => {
     const q = query(collection(this.db, "users"));
     const querySnapshot = await getDocs(q);
-    this._items.next( querySnapshot.docs.map(snap=>new UserModel().load(snap.data()).setKey(snap.id)))
+    this.$items.next( querySnapshot.docs.map(snap=>new UserModel().load(snap.data()).setKey(snap.id)))
   }
 
   async getItem(key: string) {

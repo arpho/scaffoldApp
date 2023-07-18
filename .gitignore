@@ -26,3 +26,5 @@ scraper
 .angular
 
 src/app/configs/credentials.ts
+
+src/app/services/extractions/estrazioni.service.ts

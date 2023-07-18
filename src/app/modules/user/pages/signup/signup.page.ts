@@ -101,9 +101,10 @@ validator:Validators.requiredTrue
   }
 
   async submit(ev) {
+
+    console.log("submitting user",ev,this.user)
     this.user = new UserModel().load(ev)
-    this.user.password = configs.locked? ev.password.password:"VilU7240#"
-    this.user.email = ev.email
+    console.log("loaded user",this.user)
     this.signupUser(this.signupForm, this.user)
 
 
@@ -115,28 +116,35 @@ validator:Validators.requiredTrue
       const password: string = signupForm.value.password;
       const successHandler = async (userCredentials) => {
         console.log("got credentials",userCredentials)
-        //creating user's profile
-        const user = new UserModel().load(userCredentials.user)
-        console.log("creating",user)
+        user.key = userCredentials.user.uid
+      
         this.service.createItem(user)
-        this.modal.dismiss().then(() => {
+        this.modal.dismiss().then(async () => {const alert = await this.alertCtrl.create({
+          message:`utente ${user.getTitle().value}  creato correttamente`,
+          buttons: [{ text: 'Ok', role: 'cancel' }],
+        });
+        await alert.present();
+        await alert.onDidDismiss()
+        this.router.navigateByUrl('home');
        
 
         })
       }
       const complete = ()=>{
+        console.log("completed")
+ 
         this.router.navigateByUrl('home');
       }
 
       const errorHandler = (error) => {
+        console.log("errore errore")
         this.modal.dismiss().then(async () => {
           const alert = await this.alertCtrl.create({
-            message: error.message?error.message:`utente ${user.getTitle().value} creato correttamente`,
+            message: error.message?error.message:`utente ${user.getTitle().value} non creato`,
             buttons: [{ text: 'Ok', role: 'cancel' }],
           });
           await alert.present();
           await alert.onDidDismiss()
-          this.router.navigateByUrl('home');
           
         });
       }

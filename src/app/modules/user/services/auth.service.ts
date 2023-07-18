@@ -27,19 +27,20 @@ export class AuthService {
     return sendPasswordResetEmail(user,email);
   }
 
-  async signupUser(user:UserModel,  next?, error?, complete?) {
+  async signupUser(user:UserModel,  next?, errorHandler?, complete?) {
+    console.log("registering user",user)
     try{
       const auth = getAuth()
-      const userCredential= await createUserWithEmailAndPassword(auth,user.email,user.password)
+      const userCredential= await createUserWithEmailAndPassword(auth,user.email,user.password['password'])
       console.log("created user",userCredential)
       if(next){
         next(userCredential)
       }
     }
     catch(errorTrown){
-      console.log("errore",errorTrown)
-      if(error){
-        error(error)
+      console.log("errore",errorTrown, user)
+      if(errorHandler){
+        errorHandler(errorHandler)
       }
 
     }

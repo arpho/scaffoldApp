@@ -68,21 +68,6 @@ export class AppComponent implements OnInit {
     },
     {
       menuItem: {
-        title: "gestisci estrazioni",
-        url: "/crud",
-        icon: "list",
-        onClick: this.onOwnClick(-1, "/crud")
-      },
-      canAdd: [
-        new CheckEnabled(),
-        new CheckExpiration(),
-        new CheckRole(2)
-      ],
-      orLogic: false
-
-    },
-    {
-      menuItem: {
         title: "Intervalli",
         url: "intervals",
         icon: "stats-chart",

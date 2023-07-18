@@ -5,6 +5,9 @@ import { ItemServiceInterface } from "../models/ItemServiceInterface";
 import { ItemMocker } from "./ItemMocker";
 
 export class  serviceMocker implements ItemServiceInterface{
+  createItem(item: ItemModelInterface) {
+    
+  }
   categoriesService?: ItemServiceInterface;
   suppliersService?: ItemServiceInterface;
   paymentsService?: ItemServiceInterface;

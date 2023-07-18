@@ -4,7 +4,6 @@ import { IntervalCalculator } from 'src/app/business/intervalCalculator';
 import { makeData4D3 } from 'src/app/business/makeData4D3';
 import { Interval } from 'src/app/models/interval';
 import { DropdownQuestion } from 'src/app/modules/dynamic-form/models/question-dropdown';
-import { ExtractionService } from 'src/app/services/extractions/estrazioni.service';
 
 @Component({
   selector: 'app-intervals-d3',
@@ -41,23 +40,14 @@ export class IntervalsD3Component implements OnInit, OnDestroy, OnChanges {
   howManyIntervals = 20
   subscription2
   barData: Interval[]
-  constructor(private service: ExtractionService) { }
+  constructor() { }
   ngOnChanges(changes: SimpleChanges,): void {
     this.drawLine(this.howManyIntervals)
   }
 
   drawLine(howManyIntervals) {
     this.extractedNumber = Number(this.extractedNumber) // the number arrives as string
-    this.service.items.subscribe(extractions => {
-      const intervals = new IntervalCalculator(extractions
-        .sort(DateHelpers
-          .sorterDescendingDate))
-        .retrieveInterval(this.weel, this.extractedNumber)
-      const makeData = new makeData4D3()
-      this.barData = makeData.transform(intervals).slice(0, howManyIntervals)
 
-
-    })
 
   }
   ngOnDestroy(): void {
@@ -70,16 +60,6 @@ export class IntervalsD3Component implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit() {
-    this.subscription = this.service.items.subscribe(extractions => {
-      const intervals = new IntervalCalculator(extractions
-        .sort(DateHelpers
-          .sorterDescendingDate))
-        .retrieveInterval(this.weel, this.extractedNumber)
-      const makeData = new makeData4D3()
-      this.barData = makeData.transform(intervals).slice(0, this.howManyIntervals)
-
-
-    })
 
 
   }

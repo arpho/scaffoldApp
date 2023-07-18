@@ -26,7 +26,6 @@ import { MessageBrokerService } from '../modules/helpers/services/messages/messa
 import { MyToastService } from '../modules/helpers/services/toaster/my-toast-service.service';
 import { DateModel } from '../modules/user/models/birthDateModel';
 import { AuthService } from '../modules/user/services/auth.service';
-import { ExtractionService } from '../services/extractions/estrazioni.service';
 
 @Component({
   selector: 'app-folder',
@@ -89,7 +88,6 @@ export class FolderPage implements OnInit {
     private authService: AuthService,
     private activatedRoute: ActivatedRoute,
     private toaster: MyToastService,
-    public estrazioni: ExtractionService,
     public modalCtrl: ModalController,
     public messages: MessageBrokerService) {
     messages.subscribeTo("selectedFunction", (transformation: TransformationInterface) => {
@@ -240,35 +238,7 @@ export class FolderPage implements OnInit {
       transformation = transformation
     })
     this.folder = "GENIAL LOTTO"// this.activatedRoute.snapshot.paramMap.get('id');
-    this.estrazioni.items.subscribe((items) => {
 
-      this.estrazioniItems = []
-      this.showSpinner = items.length == 0
-      items.sort((a: Extraction, b: Extraction) => {
-        return b._dateInmsec - a._dateInmsec// ordinamento crescente dal  più recente al più vecchio
-      }).forEach((e: Extraction) => {
-        this.estrazioniItems = items
-        this.dateEstrazioni.push(e.italianDate)
-        this.dateEstrazioni = Array.from(new Set(this.dateEstrazioni)) // elimino i doppioni
-
-
-
-      }
-
-      )
-
-      const isDateEnabled = (date: string) => {
-        const helper = new Utilities4Date()
-        const out = this.dateEstrazioni.indexOf(helper.fromDatePickerFormat2ItalianFormat(date)) > -1
-        return out
-      }
-      const DescendentsorterItalianDate = (a: string, b: string) => new Date(new Utilities4Date().fromItalian2AmericanFormat(b)).getTime() -
-        new Date(new Utilities4Date().fromItalian2AmericanFormat(a)).getTime()
-      this.dateEstrazioni = this.dateEstrazioni.sort(DescendentsorterItalianDate)
-
-      this.initFormFields()
-
-    })
 
 
   }

@@ -43,15 +43,7 @@ usersRef
   paymentsService?: ItemServiceInterface;
   itemsListRef: DatabaseReference;
   reference='userProfile'
-  populateItems = async (UsersListSnapshot) => {
-    this.items_list = [];
-    UsersListSnapshot.forEach(snap => {
-      const user = new UserModel(undefined, snap.key).load(snap.data()).setKey(snap.id)
-      this.items_list.push(user);
 
-    });
-    return this.items_list
-  }
   ngOnInit(): void {
     console.log("init")
   }
@@ -64,8 +56,7 @@ usersRef
   authStateChangeHandler = async () => {
     const q = query(collection(this.db, "users"));
     const querySnapshot = await getDocs(q);
-    const users = await this.populateItems(querySnapshot);
-    this._items.next(users);
+    this._items.next( querySnapshot.docs.map(snap=>new UserModel().load(snap.data()).setKey(snap.id)))
   }
 
   async getItem(key: string) {

@@ -10,6 +10,8 @@ import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-te
 import { MyToastService } from 'src/app/modules/helpers/services/toaster/my-toast-service.service';
 import { SwitchQuestion } from 'src/app/modules/item/models/question-switch';
 import { DateModel } from 'src/app/modules/user/models/birthDateModel';
+import { UserModel } from 'src/app/modules/user/models/userModel';
+import { UsersService } from 'src/app/modules/user/services/users.service';
 import { CustomersService } from 'src/app/services/customers/customers-service.service';
 
 @Component({
@@ -21,17 +23,18 @@ import { CustomersService } from 'src/app/services/customers/customers-service.s
 
 export class UpdateCustomerPage implements OnInit {
   formFields: any[]
-  customer = new Customer
+  customer = new UserModel
 
   filter(ev) {
   }
 
   async submit(ev) {
+    console.log(" submitting")
     this.customer.load(ev)
     console.log("submitting form", ev, this.customer)
-    try {
+   
       this.service.updateItem(this.customer)
-      const result = await this.service.addCustomClaim({
+     /*  const result = await this.service.addCustomClaim({
         email: this.customer.email,
         claims: {
           expirationTime: this.customer._expirationTime,
@@ -39,26 +42,21 @@ export class UpdateCustomerPage implements OnInit {
           level: this.customer.level,
           userType: this.customer.userType
         }
-      })
-      console.log("done", result)
+      }) */
+      console.log("done")
       this.toaster.presentToast("user updated")
       this.dismiss(this.customer)
-    }
-    catch (error) {
-      console.log(error)
-      this.toaster.presentToast("ho riscontrato dei problemi")
-      this.dismiss()
-    }
+  
   }
 
 
-  dismiss(customer?: Customer) {
+  dismiss(customer?: UserModel) {
     this.modalCtrl.dismiss(customer)
   }
 
   constructor(public navParams: NavParams,
     public modalCtrl: ModalController,
-    public service: CustomersService,
+    public service: UsersService,
     public toaster: MyToastService) {
   }
 
@@ -79,6 +77,11 @@ export class UpdateCustomerPage implements OnInit {
         label: "cognome",
         value: this.customer.lastName,
         required: true
+      }),
+      new TextboxQuestion({
+        key:"displayName",
+        label:" display name",
+        value:this.customer.displayName
       }),
       new DropdownQuestion({
         key: "level",

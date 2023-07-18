@@ -62,6 +62,8 @@ export class SignupPage implements OnInit, OnDestroy {
       label: 'password', required: configs.locked,
       retypePassword: true,
     }),
+    new TextboxQuestion({key:'displayName',
+  label:"displayName"}),
   new CheckBoxQuestion({
     key:"GDPR",
     label:"Autorizzazione alla gestione dei dati personali",

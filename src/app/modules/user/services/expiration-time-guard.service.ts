@@ -20,6 +20,8 @@ export class ExpirationTimeGuard implements CanActivate {
      state: RouterStateSnapshot):
       boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
         return new Promise((resolve,reject)=>{
+          const isKarma = document.getElementsByTagName("title")[0].innerHTML === 'Karma';
+          if(!isKarma){
           const app = initializeApp(credentials.firebase)
      
         const auth = getAuth(app)
@@ -40,7 +42,7 @@ export class ExpirationTimeGuard implements CanActivate {
             
           })
         }))
-        })
+        }})
 
         
         

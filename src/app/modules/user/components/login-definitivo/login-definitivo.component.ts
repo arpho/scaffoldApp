@@ -61,11 +61,14 @@ export class LoginDefinitivoComponent implements OnInit {
       const password = loginForm.value.password;
       this.authService.loginUser(email, password).then(
         () => {
+          const isKarma = document.getElementsByTagName("title")[0].innerHTML === 'Karma';
+          if(!isKarma){
           const auth = getAuth()
           setPersistence(auth, browserLocalPersistence)
           this.loading.dismiss().then(() => {
             this.router.navigateByUrl("home");
           });
+        }
         },
         error => {
           this.loading.dismiss().then(async () => {

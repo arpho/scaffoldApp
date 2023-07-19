@@ -1,18 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
-import { EmailAuthCredential } from 'firebase/auth';
 import { configs } from 'src/app/configs/configs';
 import { Customer } from 'src/app/models/Customer';
 import { DateQuestion } from 'src/app/modules/dynamic-form/models/question-date';
 import { DropdownQuestion } from 'src/app/modules/dynamic-form/models/question-dropdown';
-import { EmailQuestion } from 'src/app/modules/dynamic-form/models/question-email';
 import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-textbox';
 import { MyToastService } from 'src/app/modules/helpers/services/toaster/my-toast-service.service';
 import { SwitchQuestion } from 'src/app/modules/item/models/question-switch';
-import { DateModel } from 'src/app/modules/user/models/birthDateModel';
 import { UserModel } from 'src/app/modules/user/models/userModel';
 import { UsersService } from 'src/app/modules/user/services/users.service';
-import { CustomersService } from 'src/app/services/customers/customers-service.service';
 
 @Component({
   selector: 'app-update-customer',

@@ -3,6 +3,15 @@ import { IonicModule, NavParams } from '@ionic/angular';
 
 import { UpdateCustomerPage } from './update-customer.page';
 
+class MockNavParams{
+  data = {
+  };
+
+  get(param){
+    return this.data[param];
+  }
+}
+
 describe('UpdateCustomerPage', () => {
   let component: UpdateCustomerPage;
   let fixture: ComponentFixture<UpdateCustomerPage>;
@@ -11,7 +20,7 @@ describe('UpdateCustomerPage', () => {
     TestBed.configureTestingModule({
       declarations: [ UpdateCustomerPage ],
       imports: [IonicModule.forRoot()],
-      providers:[NavParams]
+      providers:[{provide: NavParams, useClass: MockNavParams},]
     }).compileComponents();
 
     fixture = TestBed.createComponent(UpdateCustomerPage);

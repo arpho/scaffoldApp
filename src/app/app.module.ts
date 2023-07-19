@@ -20,6 +20,7 @@ import { BarComponent } from './components/bar/bar.component';
 import { FilterPopupPage } from './modules/item/pages/filter-popup/filter-popup.page';
 import { CookiesLawComponent } from './components/cookies-law/cookies-law.component';
 import { MenuPage } from './pages/menu/menu.page';
+import { ResetPasswordPage } from './modules/user/pages/reset-password/reset-password.page';
 
 
 
@@ -34,6 +35,7 @@ import { MenuPage } from './pages/menu/menu.page';
         ScatterComponent,
         BarComponent,
         FilterPopupPage,
+        ResetPasswordPage,
         CookiesLawComponent,
         MenuPage,
     ],

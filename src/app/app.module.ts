@@ -53,4 +53,4 @@ import { ResetPasswordPage } from './modules/user/pages/reset-password/reset-pas
     exports: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule {}
+export class AppModule { }

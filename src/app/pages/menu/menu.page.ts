@@ -56,7 +56,8 @@ export class MenuPage implements OnInit {
 
 
   ngOnInit() {
-
+    const isKarma = document.getElementsByTagName("title")[0].innerHTML === 'Karma';
+    if(!isKarma){
 
     const app = initializeApp(credentials.firebase)
     const auth = getAuth()
@@ -88,5 +89,6 @@ export class MenuPage implements OnInit {
 
     )
   }
+}
 
 }

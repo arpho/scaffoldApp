@@ -42,9 +42,9 @@ export class MenuPage implements OnInit {
         onClick: this.onOwnClick(-1, "/customers")
       },
       canAdd: [
-/*         new CheckEnabled(),
-        new CheckExpiration(),
-        new CheckRole(2) */
+        /*         new CheckEnabled(),
+                new CheckExpiration(),
+                new CheckRole(2) */
       ],
       orLogic: false
     },
@@ -57,38 +57,38 @@ export class MenuPage implements OnInit {
 
   ngOnInit() {
     const isKarma = document.getElementsByTagName("title")[0].innerHTML === 'Karma';
-    if(!isKarma){
+    if (!isKarma) {
 
-    const app = initializeApp(credentials.firebase)
-    const auth = getAuth()
-    console.log("config",configs)
+      const app = initializeApp(credentials.firebase)
+      const auth = getAuth()
+      console.log("config", configs)
 
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const token = await user.getIdTokenResult(true).then(result => {
-          const menu = menuComposer.composeMenuByClaims(this.menuItems, result.claims,configs.locked)
-          this.appPages = menu
-          console.log("claims", result.claims)
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const token = await user.getIdTokenResult(true).then(result => {
+            const menu = menuComposer.composeMenuByClaims(this.menuItems, result.claims, configs.locked)
+            this.appPages = menu
+            console.log("claims", result.claims)
 
-          if (!new CheckEnabled().canAdd(result.claims,configs.locked)) {
-            this.router.navigate(["users/not-authorized", `contatta l'amministratore di ${configs.appName} per abilitare la tua utenza`]);
-          }
+            if (!new CheckEnabled().canAdd(result.claims, configs.locked)) {
+              this.router.navigate(["users/not-authorized", `contatta l'amministratore di ${configs.appName} per abilitare la tua utenza`]);
+            }
 
-          if (!new CheckExpiration().canAdd({ expirationTime: Number(result.claims["expirationTime"]) },configs.locked)) {
-            console.log('account scaduto')
-            this.router.navigate(["users/not-authorized", "contatta l'amministratore di Genial Lotto per rinnovare il tuo abbonamento"]);
+            if (!new CheckExpiration().canAdd({ expirationTime: Number(result.claims["expirationTime"]) }, configs.locked)) {
+              console.log('account scaduto')
+              this.router.navigate(["users/not-authorized", "contatta l'amministratore di Genial Lotto per rinnovare il tuo abbonamento"]);
 
-          }
-        })
+            }
+          })
 
 
-      } else {
-        this.router.navigate(["/users/login"])
+        } else {
+          this.router.navigate(["/users/login"])
+        }
       }
-    }
 
-    )
+      )
+    }
   }
-}
 
 }

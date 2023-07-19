@@ -28,21 +28,21 @@ export class UpdateCustomerPage implements OnInit {
     console.log(" submitting")
     this.customer.load(ev)
     console.log("submitting form", ev, this.customer)
-   
-      this.service.updateItem(this.customer)
-     /*  const result = await this.service.addCustomClaim({
-        email: this.customer.email,
-        claims: {
-          expirationTime: this.customer._expirationTime,
-          enabled: this.customer.enabled,
-          level: this.customer.level,
-          userType: this.customer.userType
-        }
-      }) */
-      console.log("done")
-      this.toaster.presentToast("user updated")
-      this.dismiss(this.customer)
-  
+
+    this.service.updateItem(this.customer)
+    /*  const result = await this.service.addCustomClaim({
+       email: this.customer.email,
+       claims: {
+         expirationTime: this.customer._expirationTime,
+         enabled: this.customer.enabled,
+         level: this.customer.level,
+         userType: this.customer.userType
+       }
+     }) */
+    console.log("done")
+    this.toaster.presentToast("user updated")
+    this.dismiss(this.customer)
+
   }
 
 
@@ -75,9 +75,9 @@ export class UpdateCustomerPage implements OnInit {
         required: true
       }),
       new TextboxQuestion({
-        key:"displayName",
-        label:" display name",
-        value:this.customer.displayName
+        key: "displayName",
+        label: " display name",
+        value: this.customer.displayName
       }),
       new DropdownQuestion({
         key: "level",

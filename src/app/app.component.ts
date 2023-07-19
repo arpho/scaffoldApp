@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
         src: "/assets/icon/icons/genial.svg",
         url: '/magic',
         icon: 'mail',
-        onClick:this.onOwnClick(-1,"/magic"),
+        onClick: this.onOwnClick(-1, "/magic"),
         function: () => { }
       },
       orLogic: false,
@@ -89,27 +89,28 @@ export class AppComponent implements OnInit {
   constructor(public router: Router,
     public menu: MenuController,
 
-  ) {  }
+  ) { }
   ngOnInit(): void {
     const isKarma = document.getElementsByTagName("title")[0].innerHTML === 'Karma';
-    if(!isKarma){
-    const app = initializeApp(credentials.firebase)
-    const auth = getAuth()
+    if (!isKarma) {
+      const app = initializeApp(credentials.firebase)
+      const auth = getAuth()
 
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const token = await user.getIdTokenResult(true).then(result => {
-          const menu = menuComposer.composeMenuByClaims(this.menuItems, result.claims,configs.locked)
-          this.appPages = menu
-          console.log("claims", result.claims)
-        })
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const token = await user.getIdTokenResult(true).then(result => {
+            const menu = menuComposer.composeMenuByClaims(this.menuItems, result.claims, configs.locked)
+            this.appPages = menu
+            console.log("claims", result.claims)
+          })
 
 
-      } else {
-        this.router.navigate(["/users/login"])
+        } else {
+          this.router.navigate(["/users/login"])
+        }
       }
-    }
 
-    )}
+      )
+    }
   }
 }

@@ -6,7 +6,7 @@ import 'firebase/database';
 import { DatabaseReference, getDatabase, ref, push } from "firebase/database";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, Auth, UserCredential, sendPasswordResetEmail, onAuthStateChanged } from 'firebase/auth'
 import { UserModel } from '../models/userModel'
-import {credentials } from "../../../configs/credentials"
+import { credentials } from "../../../configs/credentials"
 firebase.initializeApp(credentials.firebase);
 @Injectable({
   providedIn: 'root'
@@ -24,35 +24,35 @@ export class AuthService {
 
   resetPassword(email: string): Promise<void> {
     const user = getAuth()
-    return sendPasswordResetEmail(user,email);
+    return sendPasswordResetEmail(user, email);
   }
 
-  async signupUser(user:UserModel,  next?, errorHandler?, complete?) {
-    console.log("registering user",user)
-    try{
+  async signupUser(user: UserModel, next?, errorHandler?, complete?) {
+    console.log("registering user", user)
+    try {
       const auth = getAuth()
-      const userCredential= await createUserWithEmailAndPassword(auth,user.email,user.password['password'])
-      console.log("created user",userCredential)
-      if(next){
+      const userCredential = await createUserWithEmailAndPassword(auth, user.email, user.password['password'])
+      if (next) {
         next(userCredential)
+        await sendEmailVerification(auth.currentUser)
       }
     }
-    catch(errorTrown){
-      console.log("errore",errorTrown, user)
-      if(errorHandler){
+    catch (errorTrown) {
+      console.log("errore", errorTrown, user)
+      if (errorHandler) {
         errorHandler(errorHandler)
       }
 
     }
 
   }
-  getCustomclaims(next:(claims)=>void){
+  getCustomclaims(next: (claims) => void) {
 
     const auth = getAuth()
-    onAuthStateChanged(auth,async (user)=>{
+    onAuthStateChanged(auth, async (user) => {
 
-      if(user){
-        await user.getIdTokenResult(true).then(result=>{
+      if (user) {
+        await user.getIdTokenResult(true).then(result => {
           next(result.claims)
         })
       }
@@ -79,7 +79,7 @@ export class AuthService {
 
   logoutUser(): Promise<void> {
     const user = getAuth()
-return  user.signOut()
+    return user.signOut()
 
   }
 

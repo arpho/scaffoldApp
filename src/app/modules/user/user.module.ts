@@ -14,6 +14,7 @@ import { Css3LoginComponent } from './components/css3-login/css3-login.component
 import { LoginDefinitivoComponent } from './components/login-definitivo/login-definitivo.component';
 import { SleekLoginComponent } from './components/sleek-login/sleek-login.component';
 import { SleekResetComponent } from './components/sleek-reset/sleek-reset.component';
+import { ScoutLoginComponent } from 'src/app/modules/user/components/scout-login/scout-login.component';
 
 
 
@@ -24,8 +25,8 @@ import { SleekResetComponent } from './components/sleek-reset/sleek-reset.compon
     LoginComponent,
    LoginDefinitivoComponent,
    SleekLoginComponent,
-   SleekResetComponent
-    
+   SleekResetComponent,
+   ScoutLoginComponent    
   ],
   imports: [FormsModule,
      ReactiveFormsModule,

@@ -115,6 +115,9 @@ input {
     transition: 250ms background ease-in;
   }
 }
+h1 {
+  text-align: center;
+}
 .login-submit {
   border: 1px solid white;
   background: transparent;
@@ -141,12 +144,7 @@ input {
   position: fixed;
   top: 5%;
 }
-.underlay-photo {
-  background: url('/assets/images/loginImage.jpg') 50% 50%/300px 30px no-repeat;
-  background-size: cover;
- // -webkit-filter: grayscale(30%);
-  z-index: -1;
-}
+
 .underlay-black {
   background: rgba(0,0,0,0.7);
   z-index: -1;
@@ -171,4 +169,14 @@ input {
   .item-inner {
       border-bottom: 0 !important;
   }
+}
+
+
+.background-color {
+  /*
+* Created with https://www.css-gradient.com
+* Gradient link: https://www.css-gradient.com/?c1=a9e3ff&c2=016eff&gt=l&gd=dtr
+*/
+background: #A9E3FF;
+background: linear-gradient(225deg, #A9E3FF, #016EFF);
 }

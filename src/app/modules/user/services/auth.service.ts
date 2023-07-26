@@ -29,8 +29,21 @@ export class AuthService {
     return sendPasswordResetEmail(user,email);
   }
 
-  signupUser(user:UserModel,  next?, error?, complete?): Subscription {
-    return this.createUserObserver(user.email, user.password).subscribe({
+  async signupUser(user:UserModel,  next?, error?, complete?){
+    const auth = getAuth()
+    
+    try{
+    const userCredentials = await createUserWithEmailAndPassword(auth,user.email,user.password)
+    console.log("created user",userCredentials)
+  if(complete){
+    complete(userCredentials)
+  }
+  }
+    
+    catch{
+
+    }
+     this.createUserObserver(user.email, user.password).subscribe({
       next: v => {
         console.log("sending verification email",v)
         const userId = v['user'].uid;

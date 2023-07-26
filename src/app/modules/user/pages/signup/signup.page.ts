@@ -24,7 +24,7 @@ export class SignupPage implements OnInit, OnDestroy {
   public usersFields: any
   public modal: any;
   subscription: Subscription
-  user:UserModel
+  user: UserModel
   constructor(
     public modalCtrl: ModalController,
     private authService: AuthService,
@@ -32,28 +32,28 @@ export class SignupPage implements OnInit, OnDestroy {
     private alertCtrl: AlertController,
     private formBuilder: UntypedFormBuilder,
     private router: Router,
-    public service:UsersService
+    public service: UsersService
   ) {
     this.usersFields = [new TextboxQuestion({
       key: 'firstName',
       label: 'nome',
       required: true,
       order: 1,
-      value:!configs.locked?"Giuseppe":''
+      value: !configs.locked ? "Giuseppe" : ''
 
     }), new TextboxQuestion({
       key: 'lastName',
       label: 'cognome',
       required: true,
       order: 2,
-      value:!configs.locked?"D'Amico":''
+      value: !configs.locked ? "D'Amico" : ''
 
     }), new EmailQuestion({
       key: 'email',
       label: 'email',
       required: true,
       order: 3,
-      value:!configs.locked?"damicogiuseppe77@gmail.com":''
+      value: !configs.locked ? "damicogiuseppe77@gmail.com" : ''
 
     }),
 
@@ -62,17 +62,17 @@ export class SignupPage implements OnInit, OnDestroy {
       label: 'password', required: configs.locked,
       retypePassword: true,
     }),
-  new CheckBoxQuestion({
-    key:"GDPR",
-    label:"Autorizzazione alla gestione dei dati personali",
-  text:"Autorizzo il trattamento dei miei dati personali "+
-  " ai sensi dell’art. 13 del Decreto Legislativo 30 giugno 2003,"+
-  " n. 196 “Codice in materia di protezione dei dati personali” e dell’art. 13 del GDPR (Regolamento UE 2016/679).x",
-required:true,
-value:!configs.locked,
-validator:Validators.requiredTrue
-})
-  ]
+    new CheckBoxQuestion({
+      key: "GDPR",
+      label: "Autorizzazione alla gestione dei dati personali",
+      text: "Autorizzo il trattamento dei miei dati personali " +
+        " ai sensi dell’art. 13 del Decreto Legislativo 30 giugno 2003," +
+        " n. 196 “Codice in materia di protezione dei dati personali” e dell’art. 13 del GDPR (Regolamento UE 2016/679).x",
+      required: true,
+      value: !configs.locked,
+      validator: Validators.requiredTrue
+    })
+    ]
     this.signupForm = this.formBuilder.group({
       email: [
         '',
@@ -100,56 +100,57 @@ validator:Validators.requiredTrue
 
   async submit(ev) {
     this.user = new UserModel().load(ev)
-    this.user.password = configs.locked? ev.password.password:"VilU7240#"
+    this.user.password = configs.locked ? ev.password.password : "VilU7240#"
     this.user.email = ev.email
-    console.log("dati utente",ev,this.user)
+    console.log("dati utente", ev, this.user)
     this.signupUser(this.signupForm, this.user)
 
 
   }
 
   async signupUser(signupForm: UntypedFormGroup, user: UserModel): Promise<void> {
-  
+
     const email: string = user.email
     const password: string = signupForm.value.password;
     const successHandler = async (userCredentials) => {
-      console.log("got credentials",userCredentials)
+      console.log("got credentials", userCredentials)
       user.key = userCredentials.user.uid
       this.service.createItem(user)
-      console.log("utente",user.getTitle())
-      this.modal.dismiss().then(async () => {const alert = await this.alertCtrl.create({
-        message:`utente ${user.getTitle().value}  creato correttamente`,
-        buttons: [{ text: 'Ok', role: 'cancel' }],
-      });
-      await alert.present();
-      await alert.onDidDismiss()
-      this.router.navigateByUrl('home');
-     
+      console.log("utente", user.getTitle())
+      this.modal.dismiss().then(async () => {
+        const alert = await this.alertCtrl.create({
+          message: `utente ${user.getTitle().value}  creato correttamente`,
+          buttons: [{ text: 'Ok', role: 'cancel' }],
+        });
+        await alert.present();
+        await alert.onDidDismiss()
+        this.router.navigateByUrl('home');
+
 
       })
     }
-    const complete = ()=>{
+    const complete = () => {
       console.log("completed")
 
       this.router.navigateByUrl('home');
     }
 
     const errorHandler = (error) => {
-      console.log("errore errore",error)
+      console.log("errore errore", error)
       this.modal.dismiss().then(async () => {
         const alert = await this.alertCtrl.create({
-          message: error.message?error.message:`utente ${user.getTitle().value} non creato`,
+          message: error.message ? error.message : `utente ${user.getTitle().value} non creato`,
           buttons: [{ text: 'Ok', role: 'cancel' }],
         });
         await alert.present();
         await alert.onDidDismiss()
-        
+
       });
     }
-    this.authService.signupUser(user, successHandler, errorHandler,complete)
+    this.authService.signupUser(user, successHandler, errorHandler, complete)
 
     this.modal = await this.loadingCtrl.create();
     await this.modal.present();
   }
-  }
+}
 

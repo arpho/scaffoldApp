@@ -54,7 +54,7 @@ export class PageItemsListComponent implements OnInit, OnChanges {
     if (this.countItems() == 1) {
       out = this.dummyItem.getCountingText().singular
     }
-    
+
 
     return out
   }

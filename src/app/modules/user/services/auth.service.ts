@@ -31,7 +31,7 @@ export class AuthService {
     console.log("registering user", user)
     try {
       const auth = getAuth()
-      console.log("creating user",user)
+      console.log("creating user", user)
       const userCredential = await createUserWithEmailAndPassword(auth, user.email, user.password)
       if (next) {
         next(userCredential)

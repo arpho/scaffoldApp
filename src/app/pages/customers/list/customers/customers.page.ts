@@ -3,9 +3,9 @@ import { Utilities4Date } from '../../../../modules/helpers/dateHelper';
 import { Customer } from 'src/app/models/Customer';
 import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-textbox';
 import { ItemModelInterface } from 'src/app/modules/item/models/itemModelInterface';
-import { CustomersService } from 'src/app/services/customers/customers-service.service';
 import { NewCustomerPage } from '../../create/new-customer/new-customer.page';
 import { UpdateCustomerPage } from '../../edit/update-customer/update-customer.page';
+import { UsersService } from 'src/app/modules/user/services/users.service';
 
 @Component({
   selector: 'app-customers',

@@ -1,13 +1,4 @@
-import {UserRecord} from "firebase-functions/v1/auth";
-import { realtime} from "./configs/firebase";
-
-const insertUser = async (user: UserRecord)=>{
-
-};
-const addUserProfile = async (data: Record<string, never>) => {
-
- 
-};
+import {realtime} from "./configs/firebase";
 
 const getUserProfile = async (data: {email: string})=>{
   const ref = realtime.ref("userProfile");
@@ -31,4 +22,5 @@ const updateUserProfile = async (data: any)=>{
     message: "userProfile updated correctly",
   };
 };
-export {insertUser, addUserProfile, updateUserProfile, getUserProfile};
+export {updateUserProfile, getUserProfile};
+

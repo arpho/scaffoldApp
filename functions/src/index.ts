@@ -8,7 +8,6 @@ import {addEntry,
 } from "./entryController";
 import {addExtraction} from "./extractionController";
 import {
-  addUserProfile,
   getUserProfile,
   updateUserProfile,
 } from "./insertUserProfile";
@@ -18,15 +17,12 @@ if (admin.apps.length === 0) {
 const app = express();
 app.get("/", (req, res) => res.status(200).send("Hey there!"));
 app.post("/entries", addEntry);
-app.post("/userProfile", addUserProfile);
 exports.app = functions.https.onRequest(app);
 app.get("/entries", getAllEntries);
 app.patch("/entries/:entryId", updateEntry);
 app.delete("/entries/:entryId", deleteEntry);
 app.post("/extraction", addExtraction);
-exports.adminAddUserProfile = functions.https.onCall((data)=>{
-  addUserProfile(data);
-});
+
 
 exports.addCustomClaim = functions.https.onCall((data) => {
   return admin.auth().getUserByEmail(data.email).then((user) => {

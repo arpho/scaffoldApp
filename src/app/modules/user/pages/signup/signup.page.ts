@@ -102,6 +102,7 @@ validator:Validators.requiredTrue
     this.user = new UserModel().load(ev)
     this.user.password = configs.locked? ev.password.password:"VilU7240#"
     this.user.email = ev.email
+    console.log("dati utente",ev,this.user)
     this.signupUser(this.signupForm, this.user)
 
 
@@ -109,37 +110,46 @@ validator:Validators.requiredTrue
 
   async signupUser(signupForm: UntypedFormGroup, user: UserModel): Promise<void> {
   
-      const email: string = signupForm.value.email.email;
-      const password: string = signupForm.value.password;
-      const successHandler = async (val) => {
-        console.log("success handler got ",val)
-        await this.service.callCloudPushUser(user.serialize())
-        console.log('loading', this.modal)
-        this.modal.dismiss().then(() => {
-       
+    const email: string = user.email
+    const password: string = signupForm.value.password;
+    const successHandler = async (userCredentials) => {
+      console.log("got credentials",userCredentials)
+      user.key = userCredentials.user.uid
+      this.service.createItem(user)
+      console.log("utente",user.getTitle())
+      this.modal.dismiss().then(async () => {const alert = await this.alertCtrl.create({
+        message:`utente ${user.getTitle().value}  creato correttamente`,
+        buttons: [{ text: 'Ok', role: 'cancel' }],
+      });
+      await alert.present();
+      await alert.onDidDismiss()
+      this.router.navigateByUrl('home');
+     
 
-        })
-      }
-      const complete = ()=>{
-        this.router.navigateByUrl('home');
-      }
-
-      const errorHandler = (error) => {
-        this.modal.dismiss().then(async () => {
-          const alert = await this.alertCtrl.create({
-            message: error.message?error.message:`utente ${user.getTitle().value} creato correttamente`,
-            buttons: [{ text: 'Ok', role: 'cancel' }],
-          });
-          await alert.present();
-          await alert.onDidDismiss()
-          this.router.navigateByUrl('home');
-          
-        });
-      }
-      this.authService.signupUser(user, successHandler, errorHandler,complete)
-
-      this.modal = await this.loadingCtrl.create();
-      await this.modal.present();
+      })
     }
+    const complete = ()=>{
+      console.log("completed")
+
+      this.router.navigateByUrl('home');
+    }
+
+    const errorHandler = (error) => {
+      console.log("errore errore",error)
+      this.modal.dismiss().then(async () => {
+        const alert = await this.alertCtrl.create({
+          message: error.message?error.message:`utente ${user.getTitle().value} non creato`,
+          buttons: [{ text: 'Ok', role: 'cancel' }],
+        });
+        await alert.present();
+        await alert.onDidDismiss()
+        
+      });
+    }
+    this.authService.signupUser(user, successHandler, errorHandler,complete)
+
+    this.modal = await this.loadingCtrl.create();
+    await this.modal.present();
+  }
   }
 

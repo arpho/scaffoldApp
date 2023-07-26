@@ -6,9 +6,7 @@ import 'firebase/database';
 import { DatabaseReference, getDatabase, ref, push } from "firebase/database";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, Auth, UserCredential, sendPasswordResetEmail, onAuthStateChanged } from 'firebase/auth'
 import { UserModel } from '../models/userModel'
-import {credentials } from "../../../configs/credentials"
-import { initializeApp } from 'firebase/app';
-import { doc, getFirestore, setDoc } from 'firebase/firestore';
+import { credentials } from "../../../configs/credentials"
 firebase.initializeApp(credentials.firebase);
 @Injectable({
   providedIn: 'root'
@@ -26,62 +24,36 @@ export class AuthService {
 
   resetPassword(email: string): Promise<void> {
     const user = getAuth()
-    return sendPasswordResetEmail(user,email);
+    return sendPasswordResetEmail(user, email);
   }
 
-  async signupUser(user:UserModel,  next?, error?, complete?){
-    const auth = getAuth()
-    
-    try{
-    const userCredentials = await createUserWithEmailAndPassword(auth,user.email,user.password)
-    console.log("created user",userCredentials)
-  if(complete){
-    complete(userCredentials)
-  }
-  }
-    
-    catch{
+  async signupUser(user: UserModel, next?, errorHandler?, complete?) {
+    console.log("registering user", user)
+    try {
+      const auth = getAuth()
+      console.log("creating user",user)
+      const userCredential = await createUserWithEmailAndPassword(auth, user.email, user.password)
+      if (next) {
+        next(userCredential)
+        await sendEmailVerification(auth.currentUser)
+      }
+    }
+    catch (errorTrown) {
+      console.log("errore", errorTrown, user)
+      if (errorHandler) {
+        errorHandler(errorHandler)
+      }
 
     }
-     this.createUserObserver(user.email, user.password).subscribe({
-      next: v => {
-        console.log("sending verification email",v)
-        const userId = v['user'].uid;
-        sendEmailVerification(v['user'])
-        const app = initializeApp(credentials.firebase)
-        const db = getFirestore(app)
-        const newUser = new UserModel(user).load(user).setKey(userId)
-
-        console.log('new user',newUser.serialize())
-        setDoc(doc(db,"users",userId),newUser.serialize())
-        if (next) {
-          next(v['user'])
-        }
-      },
-      error: e => {
-        console.error('errore', e)
-
-        if (error) {
-          error(e)
-        }
-      },
-      complete: () => {
-        console.log('ok')
-        if (complete) {
-          console.log("completing")
-          complete()
-        }
-      }
-    })
 
   }
-  getCustomclaims(next:(claims)=>void){
+  getCustomclaims(next: (claims) => void) {
 
     const auth = getAuth()
-    onAuthStateChanged(auth,async (user)=>{
+    onAuthStateChanged(auth, async (user) => {
 
-      if(user){
-        await user.getIdTokenResult(true).then(result=>{
+      if (user) {
+        await user.getIdTokenResult(true).then(result => {
           next(result.claims)
         })
       }
@@ -108,7 +80,7 @@ export class AuthService {
 
   logoutUser(): Promise<void> {
     const user = getAuth()
-return  user.signOut()
+    return user.signOut()
 
   }
 

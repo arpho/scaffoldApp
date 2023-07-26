@@ -11,7 +11,7 @@ suppliersService?: ItemServiceInterface
 paymentsService?: ItemServiceInterface
 reference:string //it s the reference name in the realtime database
 // items?: Observable<Array<ItemModelInterface>>
-   _items: BehaviorSubject<Array<ItemModelInterface>> // = new BehaviorSubject([])
+   $items: BehaviorSubject<Array<ItemModelInterface>> // = new BehaviorSubject([])
    items_list: Array<ItemModelInterface> // = []
    db:Database
    itemsListRef:DatabaseReference
@@ -36,10 +36,15 @@ reference:string //it s the reference name in the realtime database
 
     /** return a void item of the type handled by the service */
     getEmptyItem(): ItemModelInterface;
-    /**crea un item in firebase
+    /**aggiorna un item in firebase
+     *
+     */
+    setItem(item: ItemModelInterface);
+    loadDataAndPublish(): void;
+    
+    /**aggiorna un item in firebase
      *
      */
     createItem(item: ItemModelInterface);
-    loadDataAndPublish(): void;
 
 }

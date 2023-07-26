@@ -101,7 +101,7 @@ export class NewCustomerPage implements OnInit {
     this.customer.load(ev)
     this.customer.dor = undefined
     console.log("new user", this.customer)
-    this.service.createItem(this.customer).then(async () => {
+    this.service.setItem(this.customer).then(async () => {
       const code = new EnablingCode({ code: this.customer.enablingCode })
       await this.codes.createItem(code)
       this.toaster.presentToast("utente inizializzato correttamente");

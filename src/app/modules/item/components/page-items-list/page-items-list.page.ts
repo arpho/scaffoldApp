@@ -142,7 +142,7 @@ export class PageItemsListComponent implements OnInit, OnChanges {
 
   countItems() {
     var count
-    if (this.service) {
+    if (this.service && this.service.items) {
       this.service.items.subscribe(items => {
         count = items.filter(this.filterFunction).length
       })

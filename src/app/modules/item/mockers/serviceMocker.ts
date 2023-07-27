@@ -5,6 +5,10 @@ import { ItemServiceInterface } from "../models/ItemServiceInterface";
 import { ItemMocker } from "./ItemMocker";
 
 export class  serviceMocker implements ItemServiceInterface{
+  $items: BehaviorSubject<ItemModelInterface[]>;
+  setItem(item: ItemModelInterface) {
+    throw new Error("Method not implemented.");
+  }
   categoriesService?: ItemServiceInterface;
   suppliersService?: ItemServiceInterface;
   paymentsService?: ItemServiceInterface;

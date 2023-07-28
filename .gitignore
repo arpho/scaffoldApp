@@ -30,3 +30,5 @@ src/app/configs/credentials.ts
 src/app/services/extractions/estrazioni.service.ts
 
 src/assets/fonts/Anton/OFL.txt
+
+favicon_io/

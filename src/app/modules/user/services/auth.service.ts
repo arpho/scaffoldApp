@@ -7,6 +7,7 @@ import { DatabaseReference, getDatabase, ref, push } from "firebase/database";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, Auth, UserCredential, sendPasswordResetEmail, onAuthStateChanged } from 'firebase/auth'
 import { UserModel } from '../models/userModel'
 import { credentials } from "../../../configs/credentials"
+import { initializeApp } from 'firebase/app';
 firebase.initializeApp(credentials.firebase);
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,20 @@ export class AuthService {
     }
 
   }
+
+async getToken(next:(token:string)=>void){
+  const app = initializeApp(credentials.firebase)
+      const auth = getAuth()
+      let token =""
+      onAuthStateChanged(auth,async user=>{
+        token = (await user.getIdTokenResult()).token
+        console.log("got token",token)
+        next(token)
+      })
+
+     
+}
+
   getCustomclaims(next: (claims) => void) {
 
     const auth = getAuth()

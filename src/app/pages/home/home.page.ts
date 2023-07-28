@@ -3,6 +3,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { credentials } from 'src/app/configs/credentials';
 import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-textbox';
+import { KempelenService } from 'src/app/services/kempelen-service.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomePage implements OnInit {
     })
   ]
 
-  constructor() { }
+  constructor(private service:KempelenService) { }
   filter(ev){
     console.log("typing",ev)
   }

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { KempelenServiceService } from './kempelen-service.service';
+import { KempelenService } from './kempelen-service.service';
 
 describe('KempelenServiceService', () => {
-  let service: KempelenServiceService;
+  let service: KempelenService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(KempelenServiceService);
+    service = TestBed.inject(KempelenService);
   });
 
   it('should be created', () => {

@@ -65,8 +65,11 @@ export class MenuPage implements OnInit {
 
       onAuthStateChanged(auth, async (user) => {
         if (user) {
-          const token = await user.getIdTokenResult(true).then(result => {
+          const token = await user.getIdTokenResult(true).then(async result => {
             const menu = menuComposer.composeMenuByClaims(this.menuItems, result.claims, configs.locked)
+            console.log("user logged in", user)
+            console.log("user logged in")
+            console.log("token", await user.getIdTokenResult())
             this.appPages = menu
             console.log("claims", result.claims)
 

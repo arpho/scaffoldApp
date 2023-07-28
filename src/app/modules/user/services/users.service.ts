@@ -109,7 +109,6 @@ console.error(error);
 
 
    async  createItem(item: ItemModelInterface) {
-    console.log("creating document",item)
   
       return  setDoc(doc(this.db,"users",item.key),item.serialize())
     }

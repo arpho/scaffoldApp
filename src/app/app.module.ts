@@ -21,6 +21,7 @@ import { FilterPopupPage } from './modules/item/pages/filter-popup/filter-popup.
 import { CookiesLawComponent } from './components/cookies-law/cookies-law.component';
 import { MenuPage } from './pages/menu/menu.page';
 import { ResetPasswordPage } from './modules/user/pages/reset-password/reset-password.page';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -44,6 +45,7 @@ import { ResetPasswordPage } from './modules/user/pages/reset-password/reset-pas
         IonicModule.forRoot(),
         AppRoutingModule,
         DynamicFormModule,
+        HttpClientModule,
         ItemModule,
         HelpersModule,
         UserModule,

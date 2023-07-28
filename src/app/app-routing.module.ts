@@ -8,12 +8,12 @@ import { RoleGuardService } from './modules/user/services/role-guards.service';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'menu',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
     path: 'home',
-    redirectTo: 'menu',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
 

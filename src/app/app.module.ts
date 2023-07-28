@@ -21,7 +21,8 @@ import { FilterPopupPage } from './modules/item/pages/filter-popup/filter-popup.
 import { CookiesLawComponent } from './components/cookies-law/cookies-law.component';
 import { MenuPage } from './pages/menu/menu.page';
 import { ResetPasswordPage } from './modules/user/pages/reset-password/reset-password.page';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { TokenInterceptor } from './services/tokenInterceptor';
 
 
 
@@ -50,7 +51,13 @@ import { HttpClientModule } from '@angular/common/http';
         HelpersModule,
         UserModule,
     ],
-    providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+    providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TokenInterceptor,
+            multi: true
+          }
+    ],
     bootstrap: [AppComponent],
     exports: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -95,6 +95,15 @@ input {
     transition: 250ms background ease-in;
   }
 }
+
+p {
+  font-size: 0.7rem;
+}
+
+ion-button#login-new-user[_ngcontent-wku-c100] {
+  margin: 0 auto;
+  width: 34%;
+}
 .login-new-user {
   //border: 1px solid white;
   //bottom: 1.5rem;
@@ -142,12 +151,22 @@ h1 {
   background: white;
 }
 
+p#text-new_user {
+  margin: 0;
+  color: white;
+}
 
-.login-group {
+
+
+
+div.login-group {
   position: relative;
   top: 30%;
-  justify-content: center;
+  display: flex;
+  flex-flow: column;
+  justify-items: center;
   align-items: center;
+  justify-content: center;
 }
 
 

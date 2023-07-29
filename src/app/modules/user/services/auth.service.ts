@@ -48,7 +48,7 @@ export class AuthService {
 
   }
 
-  getPromiseOfToken(){
+  getPromisedToken(){
 
     return new Promise(async (resolve,reject)=>{
       const auth = getAuth()

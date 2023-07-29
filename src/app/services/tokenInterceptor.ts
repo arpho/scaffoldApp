@@ -22,7 +22,7 @@ export class TokenInterceptor implements HttpInterceptor {
           });
           next.handle(request);
     }
-    this.auth.getToken(tokenHandler)
+    this.auth.getPromisedToken().then(tokenHandler)
     
    
     return 

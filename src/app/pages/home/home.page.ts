@@ -37,13 +37,9 @@ export class HomePage implements OnInit {
       const auth = getAuth()
       const onAuthStateChangedHandler =async  (user)=>{
         console.log("got user",user)
-        let token = ""
-        const token1 = await this.authorization.getToken((Token=>{
-          token = Token
-          console.log("got Token",token)
-        }))
-        console.log("token1",token1)
         this.submitText = `fetch document for user ${user.uid}`
+        const token2 = await this.authorization.getPromisedToken()
+        console.log("promised token",token2)
       }
       onAuthStateChanged(auth,onAuthStateChangedHandler)
     }

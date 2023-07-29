@@ -48,6 +48,23 @@ export class AuthService {
 
   }
 
+  getPromiseOfToken(){
+
+    return new Promise(async (resolve,reject)=>{
+      const auth = getAuth()
+      try{
+      onAuthStateChanged(auth,async user=>{
+        resolve((await user.getIdTokenResult()).token)
+
+      })
+    }
+    catch(err){
+      reject(err)
+    }
+      
+    })
+  }
+
 async getToken(next:(token:string)=>void){
   const app = initializeApp(credentials.firebase)
       const auth = getAuth()

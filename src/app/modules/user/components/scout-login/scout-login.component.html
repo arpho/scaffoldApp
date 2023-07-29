@@ -19,7 +19,7 @@
     password" [class.invalid]="!loginForm.controls['password'].valid&&
     loginForm.controls['password'].touched">
       </ion-input>
-      <p routerLink="/users/reset-password" >password dimenticata?</p>
+      <a routerLink="/users/reset-password" >password dimenticata?</a>
     </ion-item>
     <ion-item class="error-message" *ngIf="!loginForm.controls['password'].valid
     && loginForm.controls['password'].touched">

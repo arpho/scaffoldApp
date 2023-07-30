@@ -52,11 +52,11 @@ import { TokenInterceptor } from './services/tokenInterceptor';
         UserModule,
     ],
     providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-        {
+    /*     {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,
             multi: true
-          }
+          } */
     ],
     bootstrap: [AppComponent],
     exports: [],

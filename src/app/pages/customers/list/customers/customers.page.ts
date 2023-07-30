@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,   } from '@angular/core';
 import { Utilities4Date } from '../../../../modules/helpers/dateHelper';
 import { Customer } from 'src/app/models/Customer';
 import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-textbox';
@@ -12,7 +12,7 @@ import { UsersService } from 'src/app/modules/user/services/users.service';
   templateUrl: './customers.page.html',
   styleUrls: ['./customers.page.scss'],
 })
-export class CustomersPage implements OnInit {
+export class CustomersPage {
   editModalPage = UpdateCustomerPage
   createModalPage = NewCustomerPage
 
@@ -43,16 +43,9 @@ export class CustomersPage implements OnInit {
 
   constructor(public service:UsersService) { 
   }
-  ngAfterViewInit(): void {
-    this.service.items.subscribe(items=> {
-    })
-  }
 
-  ngOnInit() {
-    const callback= function(data){
-    }
-    this.service.items.subscribe(callback)
-  }
+
+
   
   expiringCustomers(){
     const today= new Date()

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { Subscription } from 'rxjs';
 import { credentials } from 'src/app/configs/credentials';
 import { TextboxQuestion } from 'src/app/modules/dynamic-form/models/question-textbox';
 import { AuthService } from 'src/app/modules/user/services/auth.service';
@@ -11,22 +12,33 @@ import { KempelenService } from 'src/app/services/kempelen-service.service';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit,OnDestroy {
   submitText=""
+  subscription:Subscription
   formFields=[
     new TextboxQuestion({
-      key:"documen_id",
+      key:"document_id",
       label:"document id"
     })
   ]
 
   constructor(private service:KempelenService,private authorization:AuthService) { }
+  ngOnDestroy(): void {
+    if( this.subscription
+  )
+  {
+this.subscription.unsubscribe()
+  }
+}
   filter(ev){
     console.log("typing",ev)
   }
 
-  submit(ev){
+  async submit(ev){
     console.log("submitted",ev)
+    this.subscription = this.service.fetchAsset(await this.authorization.getLoggedUser_Id(),ev.document_id).subscribe(asset=>{
+      console.log("kempelen send this",asset)
+    })
   }
 
   async ngOnInit() {
@@ -36,10 +48,8 @@ export class HomePage implements OnInit {
       const app = initializeApp(credentials.firebase)
       const auth = getAuth()
       const onAuthStateChangedHandler =async  (user)=>{
-        console.log("got user",user)
         this.submitText = `fetch document for user ${user.uid}`
         const token2 = await this.authorization.getPromisedToken()
-        console.log("promised token",token2)
       }
       onAuthStateChanged(auth,onAuthStateChangedHandler)
     }

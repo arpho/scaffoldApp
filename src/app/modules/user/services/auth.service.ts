@@ -48,6 +48,22 @@ export class AuthService {
 
   }
 
+  getLoggedUser_Id(){
+   return new Promise((resolve,reject)=>{
+    const auth = getAuth()
+    try{
+      onAuthStateChanged(auth,async user=>{
+        resolve(user.uid)
+
+      })
+
+    }
+    catch(err){
+      reject(err)
+    }
+   })
+  }
+
   getPromisedToken(){
 
     return new Promise(async (resolve,reject)=>{

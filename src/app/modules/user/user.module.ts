@@ -15,18 +15,22 @@ import { LoginDefinitivoComponent } from './components/login-definitivo/login-de
 import { SleekLoginComponent } from './components/sleek-login/sleek-login.component';
 import { SleekResetComponent } from './components/sleek-reset/sleek-reset.component';
 import { ScoutLoginComponent } from 'src/app/modules/user/components/scout-login/scout-login.component';
+import { ScoutResetComponent } from './components/scout-reset/scout-reset.component';
+import { ResetPasswordPage } from './pages/reset-password/reset-password.page';
 
 
 
 @NgModule({
   declarations: [
     LoginPage,
+    ResetPasswordPage,
     LogoutUserComponent,
     LoginComponent,
    LoginDefinitivoComponent,
    SleekLoginComponent,
    SleekResetComponent,
-   ScoutLoginComponent    
+   ScoutLoginComponent ,
+   ScoutResetComponent  
   ],
   imports: [FormsModule,
      ReactiveFormsModule,

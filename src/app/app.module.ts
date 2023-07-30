@@ -33,7 +33,6 @@ import { ResetPasswordPage } from './modules/user/pages/reset-password/reset-pas
         NewCustomerPage,
         UpdateCustomerPage,
         ScatterComponent,
-        ResetPasswordPage,
         BarComponent,
         FilterPopupPage,
         CookiesLawComponent,

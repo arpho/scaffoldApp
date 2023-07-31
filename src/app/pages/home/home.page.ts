@@ -36,8 +36,10 @@ this.subscription.unsubscribe()
 
   async submit(ev){
     console.log("submitted",ev)
-    this.subscription = this.service.fetchAsset(await this.authorization.getLoggedUser_Id(),ev.document_id).subscribe(asset=>{
+    this.subscription =  this.service.fetchAsset(await this.authorization.getLoggedUser_Id(),ev.document_id,await this.authorization.getPromisedToken()).subscribe(asset=>{
       console.log("kempelen send this",asset)
+    }, (err)=>{
+      console.error(err)
     })
   }
 

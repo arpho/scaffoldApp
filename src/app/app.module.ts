@@ -37,7 +37,6 @@ import { TokenInterceptor } from './services/tokenInterceptor';
         ScatterComponent,
         BarComponent,
         FilterPopupPage,
-        ResetPasswordPage,
         CookiesLawComponent,
         MenuPage,
     ],

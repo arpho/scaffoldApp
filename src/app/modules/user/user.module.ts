@@ -14,12 +14,14 @@ import { Css3LoginComponent } from './components/css3-login/css3-login.component
 import { LoginDefinitivoComponent } from './components/login-definitivo/login-definitivo.component';
 import { SleekLoginComponent } from './components/sleek-login/sleek-login.component';
 import { SleekResetComponent } from './components/sleek-reset/sleek-reset.component';
+import { ResetPasswordPage } from './pages/reset-password/reset-password.page';
 
 
 
 @NgModule({
   declarations: [
     LoginPage,
+    ResetPasswordPage,
     LogoutUserComponent,
     LoginComponent,
    LoginDefinitivoComponent,

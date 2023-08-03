@@ -11,19 +11,19 @@ export class KempelenService {
   constructor(private http: HttpClient
     ) { }
 
+
    fetchAsset(ownerKey,assetId,token){
     
-    const headers = new HttpHeaders({
-      'Access-Control-Allow-Origin':'*',
-      "x-jwt":`Bearer ${token}`,
-      
-      'Content-Type': 'application/json'
-    });
-    const params = new HttpParams()
-    params.set("owner",ownerKey).set('id',assetId)
+    const headers = new HttpHeaders()
+    .set("x-jwt",`Bearer ${token}`)
+    .set('Content-Type', 'application/json')
+    .set("Access-Control-Allow-Origin","localhost:8100/home")
+    //.set("Access-Control-Allow-Origin","localhost:8100")
+    
+  /*   const params = new HttpParams()
+    params.set("owner",ownerKey).set('id',assetId) */
      const options = {
       headers: headers,
-      params: params,
       observe: 'body' as const,
       responseType: 'json' as const,
       withCredentials: true
@@ -31,9 +31,11 @@ export class KempelenService {
     console.log("headers.get('x-jwt')=",headers.get("x-jwt"))
     console.log("headers",headers)
     console.log("options",options)
-    console.log("params",params)
+    const urlFactory= (url:string,owner:string,assetId:string)=>{
+     return  `${url}?owner=${owner}&id=${assetId}`
+    }
 
     const url ="https://dev.thinkingadditive.com/v0/providers/export/requests"
-return this.http.post(url,options)
+return this.http.get(urlFactory(url,ownerKey,assetId),options)
   }
 }

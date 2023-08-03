@@ -11,9 +11,13 @@ import { Observable } from 'rxjs';
 export class TokenInterceptor implements HttpInterceptor {
   constructor(public auth: AuthService) {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log("intercepted request")
+    console.log("request",request)
+    console.log("next",next)
 
     let token =""
     const tokenHandler = (Token)=>{
+      console.log("got token",Token)
         token = Token
         request = request.clone({
             setHeaders: {

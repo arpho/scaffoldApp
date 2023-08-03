@@ -6,4 +6,6 @@
 
 <ion-content>
   <app-dynamic-form [questions]="formFields" (interactiveSubmit)="filter($event)" (singleSubmit)="submit($event)" [submitText]="submitText"></app-dynamic-form>
+  <p id="token">{{token}}</p>
+  <p id="owner">{{owner}}</p>
 </ion-content>

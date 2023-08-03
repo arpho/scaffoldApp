@@ -14,6 +14,8 @@ import { KempelenService } from 'src/app/services/kempelen-service.service';
 })
 export class HomePage implements OnInit,OnDestroy {
   submitText=""
+  token= ""
+  owner = ""
   subscription:Subscription
   formFields=[
     new TextboxQuestion({
@@ -39,6 +41,7 @@ this.subscription.unsubscribe()
     this.subscription =  this.service.fetchAsset(await this.authorization.getLoggedUser_Id(),ev.document_id,await this.authorization.getPromisedToken()).subscribe(asset=>{
       console.log("kempelen send this",asset)
     }, (err)=>{
+      console.log("errore",err)
       console.error(err)
     })
   }
@@ -51,7 +54,8 @@ this.subscription.unsubscribe()
       const auth = getAuth()
       const onAuthStateChangedHandler =async  (user)=>{
         this.submitText = `fetch document for user ${user.uid}`
-        const token2 = await this.authorization.getPromisedToken()
+        this.token = await this.authorization.getPromisedToken()
+        this.owner = await this.authorization.getLoggedUser_Id()
       }
       onAuthStateChanged(auth,onAuthStateChangedHandler)
     }

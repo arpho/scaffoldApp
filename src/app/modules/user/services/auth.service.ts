@@ -48,7 +48,7 @@ export class AuthService {
 
   }
 
-  getLoggedUser_Id(){
+  getLoggedUser_Id():Promise<string>{
    return new Promise((resolve,reject)=>{
     const auth = getAuth()
     try{
@@ -64,7 +64,7 @@ export class AuthService {
    })
   }
 
-  getPromisedToken(){
+  getPromisedToken(): Promise<string>{
 
     return new Promise(async (resolve,reject)=>{
       const auth = getAuth()

@@ -1,18 +1,23 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-title>F10SCOUT</ion-title>
-    <h3>area scout sportiva</h3>
+<ion-header  [ngStyle]="{'background-color':blue===true?'#12459e':'white'}"
+>
+  <ion-toolbar [ngStyle]="{'background-color':blue===true?'#12459e':'white'}" style="background-color: red">
+    <ion-title [ngStyle]="{'color':blue===true?'white':'#12459e','background-color':blue===true?'#12459e':'white'}">F10SCOUT</ion-title>
+    <h3 [ngStyle]="{'color':blue===true?'white':'#12459e','background-color':blue===true?'#12459e':'white'}">area scout sportiva</h3>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-no-border">
-  <body style="
-  background: #12459e">
+  <body 
+  [ngStyle]="{'background-color':blue===true?'#12459e':'white'}"
+  
+  >
 <!-- <ion-img src="/assets/images/giocatore.png"></ion-img> -->
 <!-- <div class="underlay-black"></div>  -->
-
+<!-- 
 <ion-img  src='/assets/images/palla.png' id="palla" style="width:2%" ></ion-img>
-<ion-img id="man" src="/assets/images/giocatore.png" style="width: 20%;"></ion-img>
+<ion-img id="man" src="/assets/images/giocatore.png" style="width: 20%;"></ion-img> -->
+<ion-toggle labelPlacement="end" [ngModel]="blue" (ionChange)="changeEvent($event)">Label at the Start</ion-toggle>
+<p>{{text}}</p>
   </body>
 
 </ion-content>

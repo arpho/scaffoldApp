@@ -1,10 +1,11 @@
 <div class="login-wrapper">
 <div class="login-content">
 <div class="login-logo">
-  <h1>F10SCOUT</h1>
+  <h1 >F10SCOUT</h1>
 </div>
+  <h3 >Area scout sportiva</h3>
 <form class="login-form"[formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate >
-  <ion-item class="login-row" >
+  <ion-item class="login-row"  >
     <ion-label stacked>Email</ion-label>
     <ion-input formControlName="email" class="login-username"  color="dark" type="email" placeholder="il tuo indirizzo email" [class.invalid]="!loginForm.controls['email'].valid &&
   loginForm.controls['email'].touched">

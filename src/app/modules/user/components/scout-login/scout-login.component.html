@@ -1,7 +1,7 @@
 <div class="login-group">
   <h1>F10SCOUT</h1>
   <form class="login-form"[formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate >
-    <ion-item  >
+    <ion-item class="login-row"  >
       <ion-label stacked>Email</ion-label>
       <ion-input formControlName="email" class="login-username"  color="dark" type="email" placeholder="il tuo indirizzo email" [class.invalid]="!loginForm.controls['email'].valid &&
     loginForm.controls['email'].touched">
@@ -12,20 +12,21 @@
     loginForm.controls['email'].touched">
       <ion-label>inserisci il tuo indirizzo email</ion-label>
     </ion-item>
-    <ion-item>
+    <ion-item class="login-row">
       <ion-label stacked>Password</ion-label>
       
       <ion-input class="login-password" formControlName="password" type="password" placeholder="Your
     password" [class.invalid]="!loginForm.controls['password'].valid&&
     loginForm.controls['password'].touched">
       </ion-input>
-      <a routerLink="/users/reset-password" >password dimenticata?</a>
     </ion-item>
     <ion-item class="error-message" *ngIf="!loginForm.controls['password'].valid
     && loginForm.controls['password'].touched">
+
+
       <ion-label>Your password needs more than 6 characters.</ion-label>
     </ion-item>
-  
+    <a id=" forgottenPassword" routerLink="/users/reset-password" >password dimenticata?</a>
     <ion-button (click)="loginUser(loginForm)" expand="block"  [disabled]="!loginForm.valid" class="login-submit" class="scout">
       Accedi
     </ion-button>

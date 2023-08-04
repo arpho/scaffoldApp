@@ -38,8 +38,8 @@ input {
   //background: #222;
   //box-shadow: 0 0 1rem rgba(0,0,0,0.3);
   min-height: 10rem;
-  margin: auto;
-  max-width: 33%;
+  margin: 0 ;
+  max-width: 100%;
   padding: .5rem;
 }
 .login-text {
@@ -100,9 +100,15 @@ a {
   font-size: 0.7rem;
 }
 
+form.login-form {
+  max-width: 100%;
+  height: 27vh;
+}
+
 ion-button#login-new-user[_ngcontent-wku-c100] {
   margin: 0 auto;
-  width: 34%;
+  width:
+   34%;
 }
 .login-new-user {
   //border: 1px solid white;

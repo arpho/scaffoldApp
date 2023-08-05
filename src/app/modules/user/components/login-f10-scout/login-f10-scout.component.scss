@@ -131,7 +131,14 @@ input {
   }
 }
 
-
+h1 {
+  position: relative;
+  top: -21px;
+  text-align: center;
+  color: #FFF;
+  //text-decoration: none;
+  border-bottom: none;
+}
 
 
 [class*=underlay] {

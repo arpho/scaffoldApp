@@ -18,6 +18,7 @@ import { ScoutLoginComponent } from 'src/app/modules/user/components/scout-login
 import { ScoutResetComponent } from './components/scout-reset/scout-reset.component';
 import { ResetPasswordPage } from './pages/reset-password/reset-password.page';
 import { WyscoutLoginComponent } from './components/wyscout-login/wyscout-login.component';
+import { LoginF10ScoutComponent } from './components/login-f10-scout/login-f10-scout.component';
 
 
 
@@ -32,7 +33,8 @@ import { WyscoutLoginComponent } from './components/wyscout-login/wyscout-login.
    SleekResetComponent,
    ScoutLoginComponent ,
    ScoutResetComponent ,
-   WyscoutLoginComponent
+   WyscoutLoginComponent,
+   LoginF10ScoutComponent,
   ],
   imports: [FormsModule,
      ReactiveFormsModule,

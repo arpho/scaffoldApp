@@ -1,11 +1,12 @@
-<div class="login-wrapper">
-  <div class="login-content">
-  <div class="login-logo">
-    <h1 >F10SCOUT</h1>
-  </div>
-    <h3 >Area scout sportiva</h3>
+<div class="login-group">
   <form class="login-form"[formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate >
-    <ion-item class="login-row"  >
+    <p class="login-text">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-lock fa-stack-1x"></i>
+      </span>
+    </p>
+    <ion-item  >
       <ion-label stacked>Email</ion-label>
       <ion-input formControlName="email" class="login-username"  color="dark" type="email" placeholder="il tuo indirizzo email" [class.invalid]="!loginForm.controls['email'].valid &&
     loginForm.controls['email'].touched">
@@ -16,10 +17,8 @@
     loginForm.controls['email'].touched">
       <ion-label>inserisci il tuo indirizzo email</ion-label>
     </ion-item>
-    <div class="login-row">
-    <ion-item class="login-row">
+    <ion-item>
       <ion-label stacked>Password</ion-label>
-      
       <ion-input class="login-password" formControlName="password" type="password" placeholder="Your
     password" [class.invalid]="!loginForm.controls['password'].valid&&
     loginForm.controls['password'].touched">
@@ -27,23 +26,27 @@
     </ion-item>
     <ion-item class="error-message" *ngIf="!loginForm.controls['password'].valid
     && loginForm.controls['password'].touched">
-  
-  
       <ion-label>Your password needs more than 6 characters.</ion-label>
     </ion-item>
-    <a id=" forgottenPassword" routerLink="/users/reset-password" >password dimenticata?</a>
-    <ion-button (click)="loginUser(loginForm)" expand="block"  [disabled]="!loginForm.valid" class="login-submit" class="scout">
+  
+    <ion-button (click)="loginUser(loginForm)" expand="block" color="dark" [disabled]="!loginForm.valid" class="login-submit">
       Accedi
     </ion-button>
-  </div>
-   <!--  <ion-button expand="block" class="login-forgot-pass"  routerLink="/users/reset-password"  class="scout">
-      password dimenticata 
-    </ion-button> -->
+    <ion-button expand="block" class="login-new-user" (click)="register()" color="dark" style="padding:0.4rem">
+      {{buttonText}}
+    </ion-button>
+    <ion-button expand="block" class="login-forgot-pass"  routerLink="/users/reset-password" color="dark">
+      password dimenticata :(
+    </ion-button>
   
   </form>
-  <p id="text-new_user">non hai un account?</p>
-  <ion-button  id="login-new-user" (click)="register()" style="padding:0.4rem" class="scout">
-    {{buttonText}}
-  </ion-button>
-  </div> <!--login-content-->
-  </div><!--login-wrapper-->
+  
+  
+  
+  
+  
+  <div class="underlay-photo"></div>
+  </div>
+  <div class="underlay-black"></div> 
+  
+  

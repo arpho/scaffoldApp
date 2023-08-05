@@ -1,4 +1,4 @@
-form {
+form {// center the login form for all screen
     margin-bottom: 32px;
     button {
         margin-top: 20px !important;
@@ -33,30 +33,14 @@ ion-input {
         border-bottom: 0 !important;
     }
 }
-.center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 300px;
-    width: 300px;
-    position: relative;
-    left: 30%;
-    top: 3%;
-  }
-  
 
-  /* On screens that are 500px or less, set the background color to olive */
-@media screen and (max-width: 500px) {
-    app-wyscout-login {
-        display: flex;
-        top: 13vh;
-        /* left: 50%; */
-        margin-left: 0 auto;
-        position: relative;
-        align-content: stretch;
-        justify-content: space-evenly;
-        align-items: flex-end;
-        flex-wrap: nowrap;
-        flex-direction: column;
-    }
+
+
+.background-color{
+  //  --background: url(/assets/images/geniallotto.jpg) 50% 50%/600px 600px no-repeat;
+  background: -webkit-linear-gradient(-45deg,  #EA5C54  0%,#bb6dec 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(-45deg,  #EA5C54  0%,#bb6dec 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(-45deg,  #EA5C54  0%,#bb6dec 100%); /* IE10+ */
+  background: linear-gradient(135deg,  #EA5C54  0%,#bb6dec 100%); /* W3C */
+    
 }

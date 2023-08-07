@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Feedback } from 'src/app/models/feedback';
 
 @Component({
   selector: 'app-feedback',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedbackComponent implements OnInit {
 
-  constructor() { }
+  customerFeedback = new Feedback();
+constructor() { }
+saveFeedback(): void {
+  alert('Thanks for your valuable feedback!!!\nThe feedback has been submitted succesfully.');
+  console.table(this.customerFeedback);
+}
 
   ngOnInit() {}
 

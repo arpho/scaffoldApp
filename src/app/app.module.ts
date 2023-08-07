@@ -23,6 +23,7 @@ import { MenuPage } from './pages/menu/menu.page';
 import { ResetPasswordPage } from './modules/user/pages/reset-password/reset-password.page';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './services/tokenInterceptor';
+import { TranslocoRootModule } from './transloco-root.module';
 
 
 
@@ -49,6 +50,7 @@ import { TokenInterceptor } from './services/tokenInterceptor';
         ItemModule,
         HelpersModule,
         UserModule,
+        TranslocoRootModule,
     ],
     providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     /*      {

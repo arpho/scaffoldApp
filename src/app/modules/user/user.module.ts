@@ -19,6 +19,7 @@ import { ScoutResetComponent } from './components/scout-reset/scout-reset.compon
 import { ResetPasswordPage } from './pages/reset-password/reset-password.page';
 import { WyscoutLoginComponent } from './components/wyscout-login/wyscout-login.component';
 import { LoginF10ScoutComponent } from './components/login-f10-scout/login-f10-scout.component';
+import { TranslocoModule } from '@ngneat/transloco';
 
 
 
@@ -41,6 +42,7 @@ import { LoginF10ScoutComponent } from './components/login-f10-scout/login-f10-s
       IonicModule.forRoot(),
        RouterModule.forChild(routes),
     CommonModule,
+    TranslocoModule,
      DynamicFormModule,
   ],
   exports:[

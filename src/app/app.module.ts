@@ -24,6 +24,8 @@ import { ResetPasswordPage } from './modules/user/pages/reset-password/reset-pas
 import { HomePage } from './pages/home/home.page';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslocoRootModule } from './transloco-root.module';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -52,6 +54,8 @@ import { TranslocoRootModule } from './transloco-root.module';
         UserModule,
         HttpClientModule,
         TranslocoRootModule,
+        FormsModule,
+        BsDropdownModule.forRoot(),
     ],
     providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
     bootstrap: [AppComponent],

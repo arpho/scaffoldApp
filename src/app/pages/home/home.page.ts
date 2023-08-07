@@ -15,8 +15,9 @@ import { KempelenService } from 'src/app/services/kempelen-service.service';
 export class HomePage implements OnInit,OnDestroy {
   submitText=""
   token= ""
+  showSpinner = false
   owner = ""
-  subscription:Subscription
+  subscription:Subscription = new Subscription()
   formFields=[
     new TextboxQuestion({
       key:"document_id",
@@ -35,15 +36,27 @@ this.subscription.unsubscribe()
   filter(ev){
     console.log("typing",ev)
   }
+ async fetchProjects(){
+  this.showSpinner= true
+  console.log("fetching projects")
+    this.subscription.add(this.service.fetchProjectsList(await this.authorization.getPromisedToken()).subscribe(projects=>{
+      console.log("got projects",projects)
+      this.showSpinner= false
+    },err=>{
+      console.error(err)
+      this.showSpinner= false
+    }))
+
+  }
 
   async submit(ev){
     console.log("submitted",ev)
-    this.subscription =  this.service.fetchAsset(await this.authorization.getLoggedUser_Id(),ev.document_id,await this.authorization.getPromisedToken()).subscribe(asset=>{
+    this.subscription.add(  this.service.fetchAsset(await this.authorization.getLoggedUser_Id(),ev.document_id,await this.authorization.getPromisedToken()).subscribe(asset=>{
       console.log("kempelen send this",asset)
     }, (err)=>{
       console.log("errore",err)
       console.error(err)
-    })
+    }))
   }
 
   async ngOnInit() {

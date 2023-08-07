@@ -22,6 +22,8 @@ import { CookiesLawComponent } from './components/cookies-law/cookies-law.compon
 import { MenuPage } from './pages/menu/menu.page';
 import { ResetPasswordPage } from './modules/user/pages/reset-password/reset-password.page';
 import { HomePage } from './pages/home/home.page';
+import { HttpClientModule } from '@angular/common/http';
+import { TranslocoRootModule } from './transloco-root.module';
 
 
 
@@ -48,6 +50,8 @@ import { HomePage } from './pages/home/home.page';
         ItemModule,
         HelpersModule,
         UserModule,
+        HttpClientModule,
+        TranslocoRootModule,
     ],
     providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
     bootstrap: [AppComponent],

@@ -1,5 +1,7 @@
 module.exports = {
   rootTranslationsPath: 'src/assets/i18n/',
-  langs: ['en', 'nl'],
+  langs: ['en', 'nl','it'],
+  defaultLang: 'it',
+  reRenderOnLangChange: true,
   keysManager: {}
 };

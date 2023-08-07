@@ -26,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TranslocoRootModule } from './transloco-root.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FormsModule } from '@angular/forms';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 
 
@@ -40,6 +41,7 @@ import { FormsModule } from '@angular/forms';
         UpdateCustomerPage,
         ScatterComponent,
         BarComponent,
+        NavBarComponent,
         FilterPopupPage,
         CookiesLawComponent,
         MenuPage,

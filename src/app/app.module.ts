@@ -27,8 +27,7 @@ import { TranslocoRootModule } from './transloco-root.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FormsModule } from '@angular/forms';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-import { Feedback } from './models/feedback';
-import { FeedbackComponent } from './components/feedback/feedback.component';
+
 
 
 
@@ -44,7 +43,6 @@ import { FeedbackComponent } from './components/feedback/feedback.component';
         ScatterComponent,
         BarComponent,
         NavBarComponent,
-        FeedbackComponent,
         FilterPopupPage,
         CookiesLawComponent,
         MenuPage,

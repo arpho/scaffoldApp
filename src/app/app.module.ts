@@ -27,7 +27,9 @@ import { TranslocoRootModule } from './transloco-root.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FormsModule } from '@angular/forms';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-
+import { HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 
 
@@ -65,4 +67,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     exports: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule {}
+export class AppModule { }
+export function createTranslateLoader(http: HttpClient) {
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}

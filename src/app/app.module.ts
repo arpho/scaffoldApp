@@ -61,6 +61,14 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
         TranslocoRootModule,
         FormsModule,
         BsDropdownModule.forRoot(),
+        HttpClientModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps: [HttpClient]
+            }
+        })
     ],
     providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
     bootstrap: [AppComponent],

@@ -1,6 +1,5 @@
 import { UserType } from "../models/usersType";
 import { RoleModel } from "../modules/user/models/privilegesLevelModel";
-import { UserTpeModedl } from "../modules/user/models/UserTypeModel";
 export enum registrationStrategy {
   regular = 0,
   twoSteps

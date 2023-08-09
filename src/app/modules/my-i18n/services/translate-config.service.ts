@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { TranslateService } from '@ngx-translate/core';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,5 +11,7 @@ export class TranslateConfigService {
     return this._currentLanguage
   }
 
-  constructor() { }
+  constructor(private service:TranslateService) { 
+    this.currentLanguage = service.getDefaultLang()
+  }
 }

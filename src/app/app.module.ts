@@ -23,14 +23,8 @@ import { MenuPage } from './pages/menu/menu.page';
 import { ResetPasswordPage } from './modules/user/pages/reset-password/reset-password.page';
 import { HomePage } from './pages/home/home.page';
 import { HttpClientModule } from '@angular/common/http';
-import { TranslocoRootModule } from './transloco-root.module';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FormsModule } from '@angular/forms';
-import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HttpClient } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
 
 
 @NgModule({
@@ -44,7 +38,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
         UpdateCustomerPage,
         ScatterComponent,
         BarComponent,
-        NavBarComponent,
         FilterPopupPage,
         CookiesLawComponent,
         MenuPage,
@@ -58,17 +51,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
         HelpersModule,
         UserModule,
         HttpClientModule,
-        TranslocoRootModule,
         FormsModule,
-        BsDropdownModule.forRoot(),
-        HttpClientModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: (createTranslateLoader),
-                deps: [HttpClient]
-            }
-        })
+        
     ],
     providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
     bootstrap: [AppComponent],
@@ -76,6 +60,3 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
-export function createTranslateLoader(http: HttpClient) {
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}

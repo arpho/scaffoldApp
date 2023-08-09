@@ -18,19 +18,14 @@ export const configs = {
     { key: "clerk", value: UserType.clerk }
   ],
   offlineEntityNumber: 0,
-  weels: [
-    "Bari",
-    "Cagliari",
-    "Firenze",
-    "Genova",
-    "Milano",
-    "Napoli",
-    "Palermo",
-    "Roma",
-    "Torino",
-    "Venezia",
-    "Nazionale"
-  ],
+  i18n:{
+    en:{label:"English",
+  dictionary:{
+    subtitle:""
+  }
+  }
+  },
+
   locked:false,
 
   enablingCodeLength: 5,

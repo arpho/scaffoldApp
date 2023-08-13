@@ -25,7 +25,13 @@ import { HomePage } from './pages/home/home.page';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { SwitchLanguageComponent } from './modules/my-i18n/components/switch-language/switch-language.component';
+import { TranslateModule,TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+export function createTranslateLoader(http: HttpClient) {
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  }
 
 @NgModule({
     declarations: [
@@ -40,11 +46,20 @@ import { HttpClient } from '@angular/common/http';
         BarComponent,
         FilterPopupPage,
         CookiesLawComponent,
+        SwitchLanguageComponent,
         MenuPage,
     ],
     imports: [
         BrowserModule,
+        HttpClientModule,
         IonicModule.forRoot(),
+        TranslateModule.forRoot({
+            loader: {
+              provide: TranslateLoader,
+              useFactory: (createTranslateLoader),
+              deps: [HttpClient]
+            }
+          }),
         AppRoutingModule,
         DynamicFormModule,
         ItemModule,

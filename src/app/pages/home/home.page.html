@@ -7,7 +7,7 @@
 
       
     </ion-title>
-    <h3 [ngStyle]="{'color':blue===true?'white':'#12459e','background-color':blue===true?'#12459e':'white'}">area scout sportiva</h3>
+    <h3 [ngStyle]="{'color':blue===true?'white':'#12459e','background-color':blue===true?'#12459e':'white'}">{{'subtitleMessage'|translate}}</h3>
   </ion-toolbar>
 </ion-header>
 
@@ -16,6 +16,7 @@
   [ngStyle]="{'background-color':blue===true?'#12459e':'white'}"
   
   >
+  <app-switch-language></app-switch-language>
   <app-logout-user></app-logout-user>
 <!-- <ion-img src="/assets/images/giocatore.png"></ion-img> -->
 <!-- <div class="underlay-black"></div>  -->
